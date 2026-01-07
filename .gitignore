@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+
+# Environment variables (NEVER commit this)
+.env
+
+# Database (The app creates this automatically)
+*.db
+*.sqlite
+
+# Logs
+npm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db

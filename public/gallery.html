@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Terminal - Gallery</title>
+    <script>
+        (function() {
+            try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); }
+            catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/styles.css?v=2.5">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="logo" title="Home">$ kryptos</a>
+        <button id="theme-switcher" aria-label="Switch Theme"></button>
+    </header>
+
+    <div class="site-wrapper">
+        <nav class="main-nav">
+            <a href="/" class="nav-link" title="Home">HOME</a>
+            <a href="/projects.html" class="nav-link" title="Code Projects">PROJECTS</a>
+            <a href="/gallery.html" class="nav-link" title="Visual Gallery">GALLERY</a>
+            <a href="/about.html" class="nav-link" title="About Me">ABOUT ME</a>
+            <a href="/lab.html" class="nav-link" title="Lab Specs">LAB</a>
+            <a href="/uses.html" class="nav-link" title="Tools Used">USES</a>
+            <a href="/contact.html" class="nav-link" title="Contact Me">CONTACT</a>
+        </nav>
+
+        <main class="main-content">
+            <section class="terminal-box section-fade-in">
+                <h2 class="with-cursor">$ ls -R /var/www/evidence/</h2>
+                <p class="prompt-line">// Visual records of hardware and environment.</p>
+                
+                <div class="photo-grid">
+                    <div class="photo-card js-open-lightbox">
+                        <div class="img-frame">
+                            <img src="/images/lab_setup.jpg" 
+                                 data-full="/images/lab_setup.jpg" 
+                                 alt="Server Rack" 
+                                 class="gallery-thumb">
+                            <div class="overlay">VIEW RECORD</div>
+                        </div>
+                        <div class="photo-meta">
+                            <span class="file-name">RACK_01.JPG</span>
+                            <p class="desc">Primary Ryzen 9950X compute node and Ubiquiti networking stack.</p>
+                        </div>
+                    </div>
+
+                    <div class="photo-card js-open-lightbox">
+                        <div class="img-frame">
+                            <img src="/images/setup.jpg" 
+                                 data-full="/images/setup.jpg" 
+                                 alt="Workstation" 
+                                 class="gallery-thumb">
+                            <div class="overlay">VIEW RECORD</div>
+                        </div>
+                        <div class="photo-meta">
+                            <span class="file-name">STATION.JPG</span>
+                            <p class="desc">Arch Linux development terminal.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <aside class="sidebar" role="complementary">
+            <h2>$ status check</h2>
+            <div class="terminal-box"></div>
+        </aside>
+        
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Attach Click Listeners to Photo Cards
+            const cards = document.querySelectorAll('.js-open-lightbox');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    openLightbox(card);
+                });
+            });
+
+            // 2. Attach Click Listener to Close Button
+            const closeBtn = document.querySelector('.lightbox-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeLightbox);
+            }
+
+            // 3. Close when clicking background
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+        });
+
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const fullImg = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            
+            // Safe selector for the image and description
+            const thumb = element.querySelector('img');
+            const descEl = element.querySelector('.desc');
+            
+            if (thumb && lightbox && fullImg) {
+                lightbox.style.display = "block";
+                
+                // Get URL from data-full
+                const fullSrc = thumb.getAttribute('data-full');
+                fullImg.src = fullSrc;
+                
+                // Safe text insertion
+                const descText = descEl ? descEl.textContent : 'Image Record';
+                caption.innerHTML = `<span style="color:var(--color-accent)">// RECORD:</span> ${descText}`;
+                
+                console.log("Opening lightbox for:", fullSrc);
+            } else {
+                console.error("Lightbox Error: Missing image or description element.");
+            }
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox) {
+                lightbox.style.display = "none";
+                // Clear src to stop video/loading
+                const fullImg = document.getElementById('lightbox-img');
+                if (fullImg) fullImg.src = ""; 
+            }
+        }
+    </script>
+   <footer class="site-footer">
+        <p>&copy; 2025 Kryptos. All rights reserved. Built with love ❤️ by Kryptos| Built with Node.js & Vanilla JS.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Terminal - Home</title>
+    <meta name="description" content="Kryptos portfolio. Cyber sec and Reverse Engineer.">
+    <meta name="author" content="Kryptos">
+    
+    <script>
+        (function() {
+            try {
+                var theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="/css/styles.css?v=1.1">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="logo" title="Back to Home">$ kryptos</a>
+        <button id="theme-switcher" aria-label="Theme Switcher" title="Switch Theme"></button>
+    </header>
+    <div class="site-wrapper">
+        <nav class="main-nav">
+    <a href="/" class="nav-link" title="Home">HOME</a>
+    <a href="/projects.html" class="nav-link" title="Code Projects">PROJECTS</a>
+    <a href="/gallery.html" class="nav-link" title="Visual Gallery">GALLERY</a>
+    <a href="/about.html" class="nav-link" title="About Me">ABOUT ME</a>
+    <a href="/lab.html" class="nav-link" title="Lab Specs">LAB</a>
+    <a href="/uses.html" class="nav-link" title="Tools Used">USES</a>
+    <a href="/contact.html" class="nav-link" title="Contact Me">CONTACT</a>
+</nav>
+        <main class="main-content">
+           <section class="hero terminal-box" id="hero-section">
+                <p class="prompt-line" id="hero-prompt"></p>
+                <h1 class="hero-name" id="hero-name"></h1>
+                <p class="hero-tagline" id="hero-tagline"></p>
+                
+                <div class="hero-actions hidden-until-ready" id="hero-actions">
+                    <a href="/projects.html" class="button primary animate-glitch" title="View Portfolio Projects">View Projects</a>
+                    <a href="/contact.html" class="button secondary" title="Send a message">Contact Me</a>
+                   
+                </div>
+            </section>
+            </section>
+            <!---<section class="latest-projects section-fade-in">
+                <h2>$ recent activity</h2>
+                <div class="project-grid home-grid" id="latest-projects-list"></div>
+                <div class="text-center">
+                    <a href=https://github.com/kryptos-s class="button tertiary" title="View all projects">View All Projects &gt;</a>
+                </div>
+            </section> --->
+        </main>
+        <aside class="sidebar" role="complementary">
+            <h2>$ status check</h2>
+            <div class="terminal-box"></div>
+        </aside>
+    </div>
+    <footer class="site-footer">
+        <p>&copy; 2025 Kryptos. All rights reserved. Built with love ❤️ by Kryptos| Built with Node.js & Vanilla JS.</p>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/gallery.js"></script>
+ 
+</body>
+</html>

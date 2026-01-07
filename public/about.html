@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Terminal - About</title>
+    <meta name="description" content="Detailed biography, skills matrix, education, and cybersecurity focus areas.">
+    <meta name="author" content="Kryptos">
+    
+<script>
+        (function() {
+            try {
+                // Get theme from localStorage, default to 'dark'
+                var theme = localStorage.getItem('theme') || 'dark';
+                // Apply it to the <html> tag instantly
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                // Fallback in case localStorage is disabled
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="logo" title="Back to Home">$ kryptos</a>
+        <button id="theme-switcher" aria-label="Theme Switcher" title="Switch Theme"></button>
+    </header>
+
+    <div class="site-wrapper">
+        <nav class="main-nav">
+    <a href="/" class="nav-link" title="Home">HOME</a>
+    <a href="/projects.html" class="nav-link" title="Code Projects">PROJECTS</a>
+    <a href="/gallery.html" class="nav-link" title="Visual Gallery">GALLERY</a>
+    <a href="/about.html" class="nav-link" title="About Me">ABOUT ME</a>
+    <a href="/lab.html" class="nav-link" title="Lab Specs">LAB</a>
+    <a href="/uses.html" class="nav-link" title="Tools Used">USES</a>
+    <a href="/contact.html" class="nav-link" title="Contact Me">CONTACT</a>
+</nav>
+
+        <main class="main-content">
+            <section class="about-bio terminal-box section-fade-in">
+                <h2 class="with-cursor">$ system profile</h2>
+                <p class="prompt-line">$ cat about_me.txt</p>
+                <p>Hello, I'm **Kryptos**. I am a first-year student focusing on **Networking & Computer Science** at SPSE PRESOV. My primary interest lies at the intersection of high-performance systems programming and deep-level security analysis, with a core focus on C, C++, and Rust.</p>
+                <p>I thrive on understanding how systems truly work—from the network layer up to the inner workings of executable binaries. My hands-on experience spans building robust networking tools in Rust to tackling reverse engineering challenges, all while leveraging modern environments like Docker and ARCH Linux.</p>
+                <p><strong>As I value privacy and anonymity, I operate exclusively under my handle, Kryptos.</strong></p>
+            </section>
+
+            <section class="skills-matrix section-fade-in">
+                <h2>$ technical skills matrix</h2>
+                <p class="subtitle">Proficiency across key languages, systems, and tools. (The required Data Table)</p>
+
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Skill / Tool</th>
+                                <th class="level-col">Proficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th rowspan="3">Languages</th>
+                                <td>C / C++ / C#</td>
+                                <td class="level-col-adv">Advanced</td>
+                            </tr>
+                            <tr>
+                                <td>Rust / Python</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                            <tr>
+                                <td>HTML / JS / TS</td>
+                                <td class="level-col-beg">Beginner</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">Databases</th>
+                                <td>SQLite</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                            <tr>
+                                <td>MySQL</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="3">Systems & Tools</th>
+                                <td>Docker / Proxmox / AWS</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                            <tr>
+                                <td>VS Code / Vim</td>
+                                <td class="level-col-adv">Advanced</td>
+                            </tr>
+                            <tr>
+                                <td>Nginx / Systemd</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="3">Cybersecurity</th>
+                                <td>Forensics / Reverse Engineering</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                            <tr>
+                                <td>Metasploit / Nmap / BeEf</td>
+                                <td class="level-col-adv">Advanced</td>
+                            </tr>
+                            <tr>
+                                <td>Offensive Security Methodologies</td>
+                                <td class="level-col-int">Intermediate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="timeline-section section-fade-in">
+                <h2>$ education & milestones</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025 - Present</div>
+                        <div class="timeline-content">
+                            <h3>SPSE PRESOV</h3>
+                            <p>Networking & Computer Science Student (Year 1).</p>
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024</div>
+                        <div class="timeline-content">
+                            <h3>DEF CON 32</h3>
+                            <p>Participated in the DEF CON 32 activities in Vegas, gaining exposure to advanced security practices and networking with professionals.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024 - Ongoing</div>
+                        <div class="timeline-content">
+                            <h3>Reverse Engineering & CTF Record</h3>
+                            <p>Achieved several records on crackmes.one, demonstrating consistent skill growth in binary analysis.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+        </main>
+
+        <aside class="sidebar" role="complementary">
+            <h2>$ status check</h2>
+            <div class="terminal-box">
+                </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Kryptos. All rights reserved. Built with love ❤️ by Kryptos| Built with Node.js & Vanilla JS.</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

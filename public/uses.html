@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Terminal - Uses</title>
+    <meta name="description" content="The hardware, software, and toolchain used by Kryptos.">
+    <meta name="author" content="Kryptos">
+    
+    <script>
+        (function() {
+            try {
+                var theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="logo" title="Back to Home">$ kryptos</a>
+        <button id="theme-switcher" aria-label="Theme Switcher" title="Switch Theme"></button>
+    </header>
+
+    <div class="site-wrapper">
+        <nav class="main-nav">
+    <a href="/" class="nav-link" title="Home">HOME</a>
+    <a href="/projects.html" class="nav-link" title="Code Projects">PROJECTS</a>
+    <a href="/gallery.html" class="nav-link" title="Visual Gallery">GALLERY</a>
+    <a href="/about.html" class="nav-link" title="About Me">ABOUT ME</a>
+    <a href="/lab.html" class="nav-link" title="Lab Specs">LAB</a>
+    <a href="/uses.html" class="nav-link" title="Tools Used">USES</a>
+    <a href="/contact.html" class="nav-link" title="Contact Me">CONTACT</a>
+</nav>
+
+        <main class="main-content">
+            <section class="uses-intro terminal-box section-fade-in">
+                <h2>$ env | grep TOOLS</h2>
+                <p class="subtitle">A list of the software, tools, and platforms I use on a daily basis for development and security research.</p>
+            </section>
+            
+            <div class="uses-grid">
+                <section class="uses-col terminal-box section-fade-in">
+                    <h3>// Core Stack</h3>
+                    <ul>
+                        <li><strong>OS:</strong> Arch Linux & Windows 11 (23H2)</li>
+                        <li><strong>Editor:</strong> NeoVim, Visual Studio, VS Code</li>
+                        <li><strong>Terminal:</strong> Tabby, Alacritty</li>
+                        <li><strong>Browser:</strong> Firefox, Waterfox</li>
+                    </ul>
+                </section>
+                
+                <section class="uses-col terminal-box section-fade-in">
+                    <h3>// Offensive Security</h3>
+                    <ul>
+                        <li>Metasploit Framework</li>
+                        <li>Nmap</li>
+                        <li>Burp Suite</li>
+                        <li>Hashcat</li>
+                    </ul>
+                </section>
+
+                <section class="uses-col terminal-box section-fade-in">
+                    <h3>// RE & Forensics</h3>
+                    <ul>
+                        <li>Ghidra</li>
+                        <li>IDA Pro 9</li>
+                        <li>x64dbg</li>
+                        <li>Volatility Framework</li>
+                        <li>Memoryze</li>
+                    </ul>
+                </section>
+            </div>
+
+        </main>
+
+        <aside class="sidebar" role="complementary">
+            <h2>$ status check</h2>
+            <div class="terminal-box">
+                </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Kryptos. All rights reserved. Built with love ❤️ by Kryptos| Built with Node.js & Vanilla JS.</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

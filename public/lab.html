@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Terminal - Lab Setup</title>
+    <meta name="description" content="Overview of the Kryptos high-performance analysis and operations lab.">
+    <meta name="author" content="Kryptos">
+    
+    <script>
+        (function() {
+            try {
+                var theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    
+    <link rel="stylesheet" href="/css/styles.css?v=2.3">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="logo" title="Back to Home">$ kryptos</a>
+        <button id="theme-switcher" aria-label="Theme Switcher" title="Switch Theme"></button>
+    </header>
+
+    <div class="site-wrapper">
+        <nav class="main-nav">
+    <a href="/" class="nav-link" title="Home">HOME</a>
+    <a href="/projects.html" class="nav-link" title="Code Projects">PROJECTS</a>
+    <a href="/gallery.html" class="nav-link" title="Visual Gallery">GALLERY</a>
+    <a href="/about.html" class="nav-link" title="About Me">ABOUT ME</a>
+    <a href="/lab.html" class="nav-link" title="Lab Specs">LAB</a>
+    <a href="/uses.html" class="nav-link" title="Tools Used">USES</a>
+    <a href="/contact.html" class="nav-link" title="Contact Me">CONTACT</a>
+</nav>
+
+        <main class="main-content">
+            <section class="terminal-box section-fade-in">
+                <h2 class="with-cursor">$ systemctl status lab-hardware</h2>
+                <p class="prompt-line">// Nodes found: 1 primary analysis cluster</p>
+                
+                <div class="specs-container">
+                    <div class="spec-item">
+                        <span class="spec-label">CPU:</span>
+                        <span class="spec-value">AMD Ryzen 9 9950X (16C/32T - Zen 5)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">RAM:</span>
+                        <span class="spec-value">128GB DDR5 @ 6000MHz</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">VIRT:</span>
+                        <span class="spec-value">Proxmox VE 8.x (KVM/LXC)</span>
+                    </div>
+                </div>
+                <p style="margin-top: 20px;">
+                    Used as a full-spectrum environment for hash-cracking, malware dissection, and direct memory analysis through DMA hardware.
+                </p>
+            </section>
+
+            <section class="terminal-box section-fade-in">
+                <h2>$ show running-config | section network</h2>
+                <div class="networking-stack">
+                    <div class="net-node">
+                        <h3>[ EDGE GATEWAY ]</h3>
+                        <p>Ubiquiti UDM Pro (10G SFP+ Uplink)</p>
+                    </div>
+                    <div class="net-node">
+                        <h3>[ CORE SWITCH ]</h3>
+                        <p>Ubiquiti USW Pro (Layer 3 Switching)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="terminal-box section-fade-in image-container">
+                <h2>$ ls -la /mnt/media/lab_photos/</h2>
+                <div class="single-photo-display">
+                    <div class="photo-wrapper">
+                        <img src="/images/lab_setup.jpg" alt="Kryptos Lab Rack" class="lab-img">
+                        <p class="img-caption">// Network Core: UDM Pro & USW Pro</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="sidebar" role="complementary">
+            <h2>$ status check</h2>
+            <div class="terminal-box">
+                <p>// Systems: ONLINE</p>
+                <p>// Location: Slovakia</p>
+                <p>// OS: Arch Linux</p>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Kryptos. All rights reserved. Built with love ❤️ by Kryptos| Built with Node.js & Vanilla JS.</p>
+    </footer>
+
+    <script src="/js/main.js"></script>
+  
+</body>
+</html>

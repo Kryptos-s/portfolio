@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kryptos Terminal - Projects</title>
+    <script>
+        (function() {
+            try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); }
+            catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/styles.css?v=2.5">
+</head>
+<body>
+    <header class="site-header">
+        <a href="/" class="logo" title="Home">$ kryptos</a>
+        <button id="theme-switcher" aria-label="Switch Theme"></button>
+    </header>
+
+    <div class="site-wrapper">
+        <nav class="main-nav">
+    <a href="/" class="nav-link" title="Home">HOME</a>
+    <a href="/projects.html" class="nav-link" title="Code Projects">PROJECTS</a>
+    <a href="/gallery.html" class="nav-link" title="Visual Gallery">GALLERY</a>
+    <a href="/about.html" class="nav-link" title="About Me">ABOUT ME</a>
+    <a href="/lab.html" class="nav-link" title="Lab Specs">LAB</a>
+    <a href="/uses.html" class="nav-link" title="Tools Used">USES</a>
+    <a href="/contact.html" class="nav-link" title="Contact Me">CONTACT</a>
+
+</nav>
+        <main class="main-content">
+            <section class="terminal-box section-fade-in">
+                <h2 class="with-cursor">$ git fetch --all</h2>
+                <p class="prompt-line">// Fetching public repositories from GitHub API...</p>
+                <div id="project-gallery-grid" class="gallery-grid">
+                    <p>Connecting to secure socket...</p>
+                </div>
+            </section>
+        </main>
+        <aside class="sidebar" role="complementary">
+            <h2>$ status check</h2>
+            <div class="terminal-box"></div>
+            <h3>$ status</h3>
+                <p>// GITHUB API: CONNECTED</p>
+                <p>// Mode: READ_ONLY</p>
+        </aside>
+        
+    </div>
+<footer class="site-footer">
+        <p>&copy; 2025 Kryptos. All rights reserved. Built with love ❤️ by Kryptos| Built with Node.js & Vanilla JS.</p>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/github.js"></script>
+
+</body>
+</html>

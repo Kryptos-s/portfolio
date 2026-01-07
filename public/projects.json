@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "C Library Management System",
+    "tags": ["C", "CLI", "Data Structures"],
+    "description": "A robust command-line application for managing library inventory and user borrowing records, focusing on efficient memory management and pointer usage.",
+    "role": "Solo Developer",
+    "link": "https://github.com/Kryptos-s/CLibrary",
+    "img_thumb": "images/thumbnails/project1_thumb.png",
+    "img_full": "images/full/project1_full.png"
+  },
+  {
+    "id": 2,
+    "name": "Rust Network Sniffer",
+    "tags": ["Rust", "Networking", "Arch Linux"],
+    "description": "A high-performance network packet sniffer built with Rust. Captures and analyzes network traffic on ARCH Linux, demonstrating systems programming skills.",
+    "role": "Lead Developer",
+    "link": "https://github.com/Kryptos-s/RustSniffer",
+    "img_thumb": "images/thumbnails/project2_thumb.png",
+    "img_full": "images/full/project2_full.png"
+  },
+  {
+    "id": 3,
+    "name": "Dockerized Web App Stack",
+    "tags": ["Docker", "AWS", "Express.js", "MySQL"],
+    "description": "Containerized a full-stack application using Docker Compose, integrating Express.js and MySQL. Optimized for deployment on AWS EC2 instances.",
+    "role": "DevOps/Backend",
+    "link": "https://github.com/Kryptos-s/DockerWebStack",
+    "img_thumb": "images/thumbnails/project3_thumb.png",
+    "img_full": "images/full/project3_full.png"
+  },
+  {
+    "id": 4,
+    "name": "Proxmox Virtual Lab Setup",
+    "tags": ["Proxmox", "Homelab", "Networking"],
+    "description": "Configuration files and guides for setting up a secure virtual lab environment in Proxmox, used for penetration testing and system administration practice.",
+    "role": "Systems Administrator",
+    "link": "https://github.com/Kryptos-s/ProxmoxLab",
+    "img_thumb": "images/thumbnails/project4_thumb.png",
+    "img_full": "images/full/project4_full.png"
+  },
+  {
+    "id": 5,
+    "name": "Reverse Engineering Challenge Writeup",
+    "tags": ["Reverse Engineering", "C++", "IDA Pro"],
+    "description": "A comprehensive writeup for a crackme challenge, detailing the process of reversing the binary, patching the code, and solving the puzzle.",
+    "role": "RE Analyst",
+    "link": "https://crackmes.one/records/Kryptos-s",
+    "img_thumb": "images/thumbnails/project5_thumb.png",
+    "img_full": "images/full/project5_full.png"
+  }
+]
