@@ -91,18 +91,23 @@ router.get('/', (req, res) => {
 
 // Whitelist Page Handler
 router.get('/:page', (req, res) => {
-    const allowedPages = [
-        'gallery.html', 
-        'projects.html',
-        'about.html', 
-        'lab.html', 
-        'uses.html', 
-        'contact.html'
-    ];
+    // Map clean names to actual files
+    const pageMap = {
+        'gallery': 'gallery.html',
+        'projects': 'projects.html',
+        'about': 'about.html',
+        'lab': 'lab.html',
+        'uses': 'uses.html',
+        'contact': 'contact.html'
+    };
     
-    if (allowedPages.includes(req.params.page)) {
-        res.sendFile(path.join(__dirname, '..', 'public', req.params.page));
+    // Check if the requested page exists in our map
+    const fileName = pageMap[req.params.page];
+
+    if (fileName) {
+        res.sendFile(path.join(__dirname, '..', 'public', fileName));
     } else {
+        // Optional: Keep 404 or redirect to home
         res.status(404).send('404: Page not found');
     }
 });
