@@ -198,3 +198,28 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSidebarUpdates();
     startHeroAnimation(); // <-- ADD THIS LINE
 });
+
+function setActiveNavLink() {
+    const path = window.location.pathname; // e.g., "/contact" or "/contact.html"
+    let currentPage = path.split('/').pop(); // "contact"
+
+  
+    if (currentPage === '') {
+        currentPage = 'home'; // Just a placeholder for root
+    }
+
+    const links = document.querySelectorAll('.main-nav .nav-link');
+    
+    links.forEach(link => {
+    
+        const linkHref = link.getAttribute('href');
+        
+       
+        if (path === '/' && linkHref === '/') {
+            link.classList.add('active');
+        } 
+        else if (linkHref !== '/' && path.includes(linkHref)) {
+            link.classList.add('active');
+        }
+    });
+}
