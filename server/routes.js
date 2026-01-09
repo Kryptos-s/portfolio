@@ -89,9 +89,9 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-// Whitelist Page Handler
+
 router.get('/:page', (req, res) => {
-    // Map clean names to actual files
+   
     const pageMap = {
         'gallery': 'gallery.html',
         'projects': 'projects.html',
@@ -101,13 +101,13 @@ router.get('/:page', (req, res) => {
         'contact': 'contact.html'
     };
     
-    // Check if the requested page exists in our map
+
     const fileName = pageMap[req.params.page];
 
     if (fileName) {
         res.sendFile(path.join(__dirname, '..', 'public', fileName));
     } else {
-        // Optional: Keep 404 or redirect to home
+        
         res.status(404).send('404: Page not found');
     }
 });
