@@ -41,22 +41,8 @@ function initDatabase() {
             )
         `);
 
-        // 2. System Logs Table (The "Spy" Table)
-        db.run(`
-            CREATE TABLE IF NOT EXISTS visitor_logs (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                ip TEXT,
-                user_agent TEXT,
-                screen_res TEXT,
-                gpu_renderer TEXT,
-                cpu_threads INTEGER,
-                timezone TEXT,
-                language TEXT,
-                referrer TEXT,
-                platform TEXT,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        `);
+        
+       /**ehrm */
     });
 
     db.close();
