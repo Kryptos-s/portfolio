@@ -67,36 +67,4 @@ function insertMessage(data) {
     });
 }
 
-/**
- * Logs visitor hardware and network telemetry.
- */
-function logVisitor(data) {
-    return new Promise((resolve, reject) => {
-        const db = new sqlite3.Database(DB_FILE);
-        const sql = `
-            INSERT INTO visitor_logs (
-                ip, user_agent, screen_res, gpu_renderer, 
-                cpu_threads, timezone, language, referrer, platform
-            ) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-        const params = [
-            data.ip,
-            data.userAgent,
-            data.screenRes,
-            data.gpu,
-            data.cpu,
-            data.timezone,
-            data.language,
-            data.referrer,
-            data.platform
-        ];
-
-        db.run(sql, params, function(err) {
-            db.close();
-            if (err) reject(err); else resolve(this.lastID);
-        });
-    });
-}
-
-module.exports = { initDatabase, insertMessage, logVisitor };
+module.exports = { initDatabase, insertMessage};
