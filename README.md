@@ -13,11 +13,11 @@ This application serves as a personal dossier and technical showcase, simulating
 * **Core:** Node.js (Express framework)
 * **Database:** SQLite3 (Local file-based storage)
 * **Frontend:** Vanilla JavaScript + HTML5 + CSS3 (No framework bloat)
-* **Security:** Helmet CSP, Rate Limiting, Input Sanitization
+* **Security:** Helmet CSP, Rate Limiting
 
 ## // INSTALLATION & DEPLOYMENT
 
 ### 1. Clone Repository
 ```bash
-git clone [https://github.com/Kryptos-s/kryptos-portfolio.git](https://github.com/Kryptos-s/kryptos-portfolio.git)
+git clone https://github.com/Kryptos-s/kryptos-portfolio.git
 cd kryptos-portfolio
