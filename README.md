@@ -1,14 +1,13 @@
-````markdown
 # kryptos-terminal-portfolio
 
 > A retro, terminal-style personal portfolio and technical playground.
 
-<!--
-INSERT A HIGH-RES SCREENSHOT OR SHORT GIF HERE.
-This is mandatory for a portfolio project.
--->
 
-**Live Demo:** https://kryptos.xyz
+
+**Live Demo:** https://lab.kryptosss.xyz
+
+
+![Website Preview](assets/preview.png)
 
 ---
 
@@ -123,4 +122,3 @@ https://github.com/Kryptos-s/portfolio/wiki
 ## License
 
 MIT
-````
