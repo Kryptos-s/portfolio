@@ -1,7 +1,7 @@
 {
   "name": "kryptos-terminal-portfolio",
   "version": "1.0.0",
-  "description": "Cybersecurity Portfolio with Terminal Interface",
+  "description": "Cybersecurity Portfolio with Terminal-like Interface",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
