@@ -7,6 +7,12 @@ node_modules/
 # Database (The app creates this automatically)
 *.db
 *.sqlite
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Claude plans / agent scratch
+.claude/
 
 # Logs
 npm-debug.log*

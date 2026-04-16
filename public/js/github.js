@@ -1,68 +1,79 @@
 /*
 ====================================
 github.js - Client Side Only
+Builds repo cards with textContent to avoid XSS from upstream repo data.
 ====================================
 */
 
+function safeUrl(url) {
+    try {
+        const u = new URL(url, window.location.origin);
+        if (u.protocol === 'http:' || u.protocol === 'https:') return u.href;
+    } catch (_) {}
+    return '#';
+}
+
+function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+}
+
+function buildRepoCard(repo) {
+    const date = new Date(repo.updated).toLocaleDateString();
+    const language = repo.language || 'Plain';
+    const stars = repo.stars || 0;
+    const description = repo.description || '// No description provided.';
+
+    const card = el('div', 'terminal-box section-fade-in is-visible');
+
+    const h3 = el('h3', null, `$ git remote -v | grep ${repo.name}`);
+    const p = el('p', 'repo-summary', description);
+
+    const stats = el('div', 'repo-stats');
+    stats.appendChild(el('span', 'tech-tag', language));
+    stats.appendChild(el('span', 'tech-tag', `\u2605 ${stars}`));
+    stats.appendChild(el('span', 'tech-tag', `UPDT: ${date}`));
+
+    const actions = el('div', 'repo-actions');
+    const link = el('a', 'button secondary', 'VIEW SOURCE');
+    link.href = safeUrl(repo.url);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    actions.appendChild(link);
+
+    card.append(h3, p, stats, actions);
+    return card;
+}
+
 async function fetchGithubRepos() {
-    console.log("GitHub Script: Started."); // Debug Step 1
-    
     const grid = document.getElementById('project-gallery-grid');
-    if (!grid) {
-        console.error("GitHub Script: Error - Could not find element #project-gallery-grid");
-        return;
-    }
+    if (!grid) return;
 
     try {
-        console.log("GitHub Script: Fetching from /api/github-repos..."); // Debug Step 2
-        
-        // Fetch from OUR local server
-        const response = await fetch('/api/github-repos'); 
-        
-        if (!response.ok) {
-            throw new Error(`Proxy error: ${response.status}`);
-        }
+        const response = await fetch('/api/github-repos');
+        if (!response.ok) throw new Error(`Proxy error: ${response.status}`);
 
         const repos = await response.json();
-        console.log("GitHub Script: Data received:", repos); // Debug Step 3
+        grid.textContent = '';
 
-        // Clear "Loading..." text
-        grid.innerHTML = ''; 
-
-        if (repos.length === 0) {
-             grid.innerHTML = '<p class="terminal-box">No repositories found.</p>';
-             return;
+        if (!Array.isArray(repos) || repos.length === 0) {
+            const empty = el('p', 'terminal-box', 'No repositories found.');
+            grid.appendChild(empty);
+            return;
         }
 
-        repos.forEach(repo => {
-            const date = new Date(repo.updated).toLocaleDateString();
-            const language = repo.language || "Plain";
-            const stars = repo.stars || 0;
-            const description = repo.description || "// No description provided.";
-
-            const repoCard = `
-                <div class="terminal-box section-fade-in" style="opacity: 1;"> <h3>$ git remote -v | grep ${repo.name}</h3>
-                    <p class="repo-summary">${description}</p>
-                    <div class="repo-stats">
-                        <span class="tech-tag">${language}</span>
-                        <span class="tech-tag">★ ${stars}</span>
-                        <span class="tech-tag">UPDT: ${date}</span>
-                    </div>
-                    <div style="margin-top:15px;">
-                        <a href="${repo.url}" target="_blank" class="button secondary">VIEW SOURCE</a>
-                    </div>
-                </div>
-            `;
-            grid.innerHTML += repoCard;
-        });
-        
-        console.log("GitHub Script: DOM updated."); // Debug Step 4
-
+        const frag = document.createDocumentFragment();
+        repos.forEach(repo => frag.appendChild(buildRepoCard(repo)));
+        grid.appendChild(frag);
     } catch (error) {
-        console.error("GitHub Script Error:", error);
-        grid.innerHTML = `<div class="terminal-box"><p class="error" style="color:red">// ERROR: ${error.message}</p></div>`;
+        grid.textContent = '';
+        const box = el('div', 'terminal-box');
+        const p = el('p', 'error', `// ERROR: ${error.message}`);
+        box.appendChild(p);
+        grid.appendChild(box);
     }
 }
 
-// Run immediately
 document.addEventListener('DOMContentLoaded', fetchGithubRepos);

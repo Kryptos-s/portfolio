@@ -7,17 +7,7 @@
     <meta name="description" content="The hardware, software, and toolchain used by Kryptos.">
     <meta name="author" content="Kryptos">
     
-    <script>
-        (function() {
-            try {
-                var theme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
-    
+    <script src="/js/theme-init.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -87,7 +77,7 @@
 
     <footer class="site-footer">
         <p>&copy; 2025 Kryptos. All rights reserved. Built with love &lt;3 by Kryptos| Built with Node.js & Vanilla JS.</p>
-        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank">github.com/Kryptos-s/portfolio</a></p>
+        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank" rel="noopener noreferrer">github.com/Kryptos-s/portfolio</a></p>
     </footer>
 
     <script src="/js/main.js"></script>

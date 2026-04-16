@@ -465,6 +465,9 @@ a:hover {
     padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.95);
 }
+.lightbox.is-open { display: block; }
+.lightbox-label { color: var(--color-accent); }
+.spec-description { margin-top: 20px; }
 .lightbox-content {
     margin: auto; display: block; max-width: 90%; max-height: 80vh;
     border: 2px solid var(--color-accent);
@@ -482,6 +485,7 @@ a:hover {
    11. Contact Form
 ------------------------------------ */
 #contact-form { max-width: 600px; margin: 20px 0; }
+#contact-form.stacked-form { display: flex; flex-direction: column; gap: 10px; }
 .form-group { margin-bottom: 1.5em; }
 .form-group label { display: block; margin-bottom: 0.5em; font-weight: 600; color: var(--color-accent-hover); }
 #contact-form input, #contact-form textarea {
@@ -503,6 +507,9 @@ a:hover {
     border-color: var(--color-accent);
     outline: none;
 }
+#contact-form input.is-valid, #contact-form textarea.is-valid { border-color: var(--color-accent); }
+#contact-form input.is-invalid, #contact-form textarea.is-invalid { border-color: #FF4444; }
+#contact-form button.is-busy { opacity: 0.7; cursor: not-allowed; }
 
 /* ------------------------------------
    12. Utilities & Responsive

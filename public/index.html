@@ -7,17 +7,7 @@
     <meta name="description" content="Kryptos portfolio. Cyber sec and Reverse Engineer.">
     <meta name="author" content="Kryptos">
     
-    <script>
-        (function() {
-            try {
-                var theme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
-    
+    <script src="/js/theme-init.js"></script>
     <link rel="stylesheet" href="/css/styles.css?v=1.1">
 </head>
 <body>
@@ -47,14 +37,6 @@
                    
                 </div>
             </section>
-            </section>
-            <!---<section class="latest-projects section-fade-in">
-                <h2>$ recent activity</h2>
-                <div class="project-grid home-grid" id="latest-projects-list"></div>
-                <div class="text-center">
-                    <a href=https://github.com/kryptos-s class="button tertiary" title="View all projects">View All Projects &gt;</a>
-                </div>
-            </section> --->
         </main>
         <aside class="sidebar" role="complementary">
             <h2>$ status check</h2>
@@ -63,7 +45,7 @@
     </div>
     <footer class="site-footer">
         <p>&copy; 2025 Kryptos. All rights reserved. Built with love &lt;3 by Kryptos| Built with Node.js & Vanilla JS.</p>
-        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank">github.com/Kryptos-s/portfolio</a></p>
+        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank" rel="noopener noreferrer">github.com/Kryptos-s/portfolio</a></p>
     </footer>
     <script src="/js/main.js"></script>
     

@@ -7,17 +7,7 @@
     <meta name="description" content="Get in touch with Kryptos via email or social links.">
     <meta name="author" content="Kryptos">
     
-    <script>
-        (function() {
-            try {
-                var theme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
-    </script>
-    
+    <script src="/js/theme-init.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -45,8 +35,8 @@
                     <li>**Handle:** Kryptos</li>
                     <li>**Location:** Slovakia</li>
                     <li>**Email:** <a href="mailto:kryptos99@proton.me">kryptos99@proton.me</a></li>
-                    <li>**GitHub:** <a href="https://github.com/Kryptos-s" target="_blank">github.com/Kryptos-s</a></li>
-                    <li>**Other Link:** <a href="https://kryptos.xyz" target="_blank">kryptos.xyz (Discord)</a></li>
+                    <li>**GitHub:** <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer">github.com/Kryptos-s</a></li>
+                    <li>**Other Link:** <a href="https://kryptos.xyz" target="_blank" rel="noopener noreferrer">kryptos.xyz (Discord)</a></li>
                 </ul>
 
                 <h3>// Languages:</h3>
@@ -55,7 +45,7 @@
 
             <section class="terminal-box">
                 <h2>$ send message</h2>
-                <form id="contact-form" style="display:flex; flex-direction:column; gap:10px;">
+                <form id="contact-form" class="stacked-form">
                     
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -96,7 +86,7 @@
 
     <footer class="site-footer">
         <p>&copy; 2025 Kryptos. All rights reserved. Built with love &lt;3 by Kryptos| Built with Node.js & Vanilla JS.</p>
-        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank">github.com/Kryptos-s/portfolio</a></p>
+        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank" rel="noopener noreferrer">github.com/Kryptos-s/portfolio</a></p>
     </footer>
 
     <script src="/js/main.js"></script>

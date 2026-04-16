@@ -5,12 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kryptos Terminal - Gallery</title>
-    <script>
-        (function() {
-            try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); }
-            catch (e) {}
-        })();
-    </script>
+    <script src="/js/theme-init.js"></script>
     <link rel="stylesheet" href="/css/styles.css?v=2.5">
 </head>
 <body>
@@ -80,74 +75,10 @@
     </div>
 
     <script src="/js/main.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. Attach Click Listeners to Photo Cards
-            const cards = document.querySelectorAll('.js-open-lightbox');
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    openLightbox(card);
-                });
-            });
-
-            // 2. Attach Click Listener to Close Button
-            const closeBtn = document.querySelector('.lightbox-close');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeLightbox);
-            }
-
-            // 3. Close when clicking background
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox) {
-                lightbox.addEventListener('click', (e) => {
-                    if (e.target === lightbox) {
-                        closeLightbox();
-                    }
-                });
-            }
-        });
-
-        function openLightbox(element) {
-            const lightbox = document.getElementById('lightbox');
-            const fullImg = document.getElementById('lightbox-img');
-            const caption = document.getElementById('lightbox-caption');
-            
-            // Safe selector for the image and description
-            const thumb = element.querySelector('img');
-            const descEl = element.querySelector('.desc');
-            
-            if (thumb && lightbox && fullImg) {
-                lightbox.style.display = "block";
-                
-                // Get URL from data-full
-                const fullSrc = thumb.getAttribute('data-full');
-                fullImg.src = fullSrc;
-                
-                // Safe text insertion
-                const descText = descEl ? descEl.textContent : 'Image Record';
-                caption.innerHTML = `<span style="color:var(--color-accent)">// RECORD:</span> ${descText}`;
-                
-                console.log("Opening lightbox for:", fullSrc);
-            } else {
-                console.error("Lightbox Error: Missing image or description element.");
-            }
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox) {
-                lightbox.style.display = "none";
-                // Clear src to stop video/loading
-                const fullImg = document.getElementById('lightbox-img');
-                if (fullImg) fullImg.src = ""; 
-            }
-        }
-    </script>
+    <script src="/js/gallery.js"></script>
    <footer class="site-footer">
         <p>&copy; 2025 Kryptos. All rights reserved. Built with love &lt;3 by Kryptos| Built with Node.js & Vanilla JS.</p>
-        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank">github.com/Kryptos-s/portfolio</a></p>
+        <p> Source code for frontend and backend is available at <a href="https://github.com/Kryptos-s/portfolio" target="_blank" rel="noopener noreferrer">github.com/Kryptos-s/portfolio</a></p>
     </footer>
 </body>
 </html>
