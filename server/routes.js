@@ -55,36 +55,68 @@ const apiLimiter = rateLimit({
 
 // --- API ROUTES ---
 
-// 1. GitHub Proxy
+// 1. GitHub Proxy — cached in-memory for 5 min, serves stale on upstream failure
+const GITHUB_TTL_MS = 5 * 60 * 1000;
+let githubCache = { data: null, fetchedAt: 0 };
+let githubInflight = null;
+
+async function fetchGithubRepos() {
+    const username = process.env.GITHUB_USERNAME;
+    if (!username) throw new Error('GitHub integration not configured.');
+
+    const headers = { 'User-Agent': 'Kryptos-Terminal-Portfolio' };
+    if (process.env.GITHUB_TOKEN) {
+        headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
+    }
+
+    const response = await fetch(
+        `https://api.github.com/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=10`,
+        { headers, signal: AbortSignal.timeout(8000) }
+    );
+    if (!response.ok) throw new Error(`GitHub API status ${response.status}`);
+
+    const data = await response.json();
+    return data.map(repo => ({
+        name: repo.name,
+        description: repo.description,
+        language: repo.language,
+        stars: repo.stargazers_count,
+        url: repo.html_url,
+        updated: repo.updated_at
+    }));
+}
+
 router.get('/api/github-repos', apiLimiter, async (req, res) => {
+    const now = Date.now();
+    const fresh = githubCache.data && (now - githubCache.fetchedAt) < GITHUB_TTL_MS;
+
+    if (fresh) {
+        res.set('Cache-Control', `public, max-age=${Math.floor(GITHUB_TTL_MS / 1000)}`);
+        return res.json(githubCache.data);
+    }
+
+    // Coalesce concurrent refreshes to one upstream call.
+    if (!githubInflight) {
+        githubInflight = fetchGithubRepos()
+            .then(data => {
+                githubCache = { data, fetchedAt: Date.now() };
+                return data;
+            })
+            .finally(() => { githubInflight = null; });
+    }
+
     try {
-        const username = process.env.GITHUB_USERNAME;
-        if (!username) {
-            return res.status(500).json({ error: 'GitHub integration not configured.' });
-        }
-        const headers = { 'User-Agent': 'Kryptos-Terminal-Portfolio' };
-        if (process.env.GITHUB_TOKEN) {
-            headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
-        }
-
-        const response = await fetch(
-            `https://api.github.com/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=10`,
-            { headers, signal: AbortSignal.timeout(8000) }
-        );
-        if (!response.ok) throw new Error(`GitHub API status ${response.status}`);
-
-        const data = await response.json();
-        const filteredData = data.map(repo => ({
-            name: repo.name,
-            description: repo.description,
-            language: repo.language,
-            stars: repo.stargazers_count,
-            url: repo.html_url,
-            updated: repo.updated_at
-        }));
-        res.json(filteredData);
+        const data = await githubInflight;
+        res.set('Cache-Control', `public, max-age=${Math.floor(GITHUB_TTL_MS / 1000)}`);
+        res.json(data);
     } catch (error) {
         logError('GitHub Proxy Error:', error);
+        // Serve stale if we have it; otherwise error.
+        if (githubCache.data) {
+            res.set('Cache-Control', 'public, max-age=30');
+            res.set('X-Cache-Status', 'stale');
+            return res.json(githubCache.data);
+        }
         res.status(502).json({ error: 'System link to GitHub offline.' });
     }
 });
