@@ -383,6 +383,8 @@ a:hover {
     color: var(--color-text-primary);
 }
 
+.repo-actions { margin-top: 15px; }
+
 /* ------------------------------------
    10. Lab Photos & Lightbox (FIXED SIZING)
 ------------------------------------ */
