@@ -1,6 +1,6 @@
 # kryptos-terminal-portfolio
 
-> A retro, terminal-style personal portfolio and technical playground.
+> personal site. terminal vibes. mostly an excuse to mess with stuff.
 
 
 
@@ -13,41 +13,31 @@
 
 ## About
 
-This project replaces a traditional “About Me” page with an interactive, terminal-inspired web interface.
+skipped the usual "about me" page and built a terminal-style site instead.
 
-The frontend is fully static and runs entirely in the browser.
-A minimal Express backend is used only where persistence or external data is required.
+frontend is plain static files. there's a small Express backend, but only because contact-form messages need somewhere to live.
 
-Public access is routed exclusively through **Cloudflare Tunnel**, ensuring the backend never exposes a public IP or open port.
-
----
-
-## Key Features
-
-- **Interactive Terminal UI**  
-  Command-driven interface inspired by classic UNIX shells.
-
-- **Minimal Backend**  
-  Express API used strictly for message persistence and limited API requests.
-
-- **Local Persistence**  
-  SQLite database for storing contact messages and operational data.
-
-- **Restricted Exposure**  
-  Server binds to `127.0.0.1` and is reachable only via Cloudflare Tunnel.
-
-- **No Framework Bloat**  
-  Built with vanilla JavaScript, HTML, and CSS.
+nothing's exposed directly. traffic comes through a Cloudflare Tunnel, so the box never has an open public port.
 
 ---
 
-## Tech Stack
+## What's in here
 
-- **Frontend:** Vanilla JS, HTML5, CSS3  
-- **Backend:** Node.js, Express  
-- **Database:** SQLite  
-- **Security:** Helmet, rate limiting  
-- **Ingress:** Cloudflare Tunnel (Zero Trust)
+- terminal-style UI, kinda like a shell prompt
+- small Express API for the contact form and a couple of github proxy calls
+- SQLite for storing messages
+- server only listens on 127.0.0.1, all traffic comes through a Cloudflare Tunnel
+- no frontend framework. plain JS, HTML, CSS.
+
+---
+
+## Stack
+
+- frontend: vanilla JS, HTML, CSS
+- backend: node + express
+- db: SQLite
+- security: helmet, rate limiting
+- ingress: Cloudflare Tunnel (Zero Trust)
 
 ---
 
@@ -75,10 +65,9 @@ GITHUB_USERNAME=your_username
 GITHUB_TOKEN=optional_token
 ```
 
-Notes:
-- `GITHUB_TOKEN` is optional
-- it is used only to avoid GitHub API rate limits
-- no authentication secrets are required
+notes:
+- `GITHUB_TOKEN` is optional. only purpose is dodging github's rate limit on unauthenticated requests.
+- nothing else needs setting up.
 
 ---
 
@@ -107,13 +96,13 @@ npm run dev
 [ SQLite DB ]
 ```
 
-The backend is never directly exposed to the public internet.
+the backend never gets a public IP. all traffic goes through Cloudflare's edge.
 
 ---
 
-## Documentation
+## Docs
 
-Full technical documentation, security model, and deployment notes are available in the Wiki:
+deeper notes (security model, deploy steps) live in the wiki:
 
 https://github.com/Kryptos-s/portfolio/wiki
 
