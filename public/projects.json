@@ -3,7 +3,7 @@
     "id": 1,
     "name": "C Library Management System",
     "tags": ["C", "CLI", "Data Structures"],
-    "description": "CLI app for tracking library inventory and borrowing. mostly an exercise in manual memory management and pointers in C.",
+    "description": "CLI app for tracking library inventory and borrowing. mostly C-pointer practice.",
     "role": "Solo Developer",
     "link": "https://github.com/Kryptos-s/CLibrary",
     "img_thumb": "images/thumbnails/project1_thumb.png",
