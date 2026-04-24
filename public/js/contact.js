@@ -1,7 +1,5 @@
 /*
-====================================
-contact.js - Contact Form Handler
-====================================
+contact.js — contact form handler.
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,14 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
 
             if (response.ok) {
-                alert(`// SUCCESS: ${result.message}\nReference ID: ${result.messageId}`);
+                alert(`// sent. ${result.message}\nref: ${result.messageId}`);
                 form.reset();
                 inputs.forEach(i => i.classList.remove('is-valid', 'is-invalid'));
             } else {
-                alert(`// ERROR: ${result.message || 'Request rejected.'}`);
+                alert(`// error: ${result.message || 'rejected.'}`);
             }
         } catch (error) {
-            alert('// SYSTEM ERROR: Connection to server failed.');
+            alert('// network error. server unreachable.');
         } finally {
             btn.textContent = originalText;
             btn.disabled = false;
