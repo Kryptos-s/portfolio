@@ -1,12 +1,6 @@
 /*
-====================================
-main.js - Global Scripts
-- Theme Switching (localStorage)
-- Navigation Active State
-- Scroll/Entry Animations
-- Sidebar updates
-- Hero typewriter
-====================================
+main.js — global stuff
+theme switcher, active nav link, scroll fade-in, sidebar updates, hero typewriter.
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,10 +75,10 @@ function initScrollAnimations() {
 // --- Sidebar Content ---
 function loadSidebarUpdates() {
     const updates = [
-        { date: 'Nov 2025', text: 'Finalizing a complex C++ networking project, soon release...' },
-        { date: 'Oct 2025', text: 'Actively studying for the CompTIA Security+ certification exam.' },
+        { date: 'Nov 2025', text: 'wrapping up a C++ networking project. release soon.' },
+        { date: 'Oct 2025', text: 'studying for Security+.' },
         { date: 'Sep 2025', text: 'SPSE here i come.' },
-        { date: 'Aug 2025', text: 'Deep dive into Rust.' }
+        { date: 'Aug 2025', text: 'deep dive into Rust.' }
     ];
 
     const container = document.querySelector('.sidebar .terminal-box');
@@ -139,7 +133,7 @@ async function startHeroAnimation() {
     await typeLine(nameEl, 'KRYPTOS', 120);
 
     nameEl.classList.remove('with-cursor');
-    await typeLine(taglineEl, '// Cyber sec  // Reverse Engineer // C family dev', 50);
+    await typeLine(taglineEl, '// cyber sec // reverse engineer // C-family dev', 50);
 
     actionsEl.classList.remove('hidden-until-ready');
 }
