@@ -1,8 +1,6 @@
 /*
-====================================
-github.js - Client Side Only
-Builds repo cards with textContent to avoid XSS from upstream repo data.
-====================================
+github.js — client side.
+builds repo cards using textContent so upstream repo data can't inject HTML.
 */
 
 function safeUrl(url) {
@@ -24,7 +22,7 @@ function buildRepoCard(repo) {
     const date = new Date(repo.updated).toLocaleDateString();
     const language = repo.language || 'Plain';
     const stars = repo.stars || 0;
-    const description = repo.description || '// No description provided.';
+    const description = repo.description || '// no description.';
 
     const card = el('div', 'terminal-box section-fade-in is-visible');
 

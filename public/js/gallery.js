@@ -1,7 +1,5 @@
 /*
-====================================
-gallery.js - Lightbox for photo cards
-====================================
+gallery.js — lightbox for photo cards.
 */
 
 document.addEventListener('DOMContentLoaded', () => {
