@@ -1,38 +1,55 @@
 /*
-gallery.js — lightbox for photo cards.
+gallery.js — lightbox with carousel navigation.
 */
 
+let galleryCards = [];
+let currentIndex = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.js-open-lightbox');
-    cards.forEach(card => {
-        card.addEventListener('click', () => openLightbox(card));
+    galleryCards = Array.from(document.querySelectorAll('.js-open-lightbox'));
+    galleryCards.forEach((card, i) => {
+        card.addEventListener('click', () => openLightbox(i));
     });
 
-    const closeBtn = document.querySelector('.lightbox-close');
-    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    document.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
+    document.querySelector('.lightbox-prev')?.addEventListener('click', () => navigate(-1));
+    document.querySelector('.lightbox-next')?.addEventListener('click', () => navigate(1));
 
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox) {
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-    }
+    document.getElementById('lightbox')?.addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox?.classList.contains('is-open')) return;
+        if (e.key === 'ArrowLeft')  navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+        if (e.key === 'Escape')     closeLightbox();
+    });
 });
 
-function openLightbox(element) {
-    const lightbox = document.getElementById('lightbox');
+function openLightbox(index) {
+    currentIndex = index;
+    renderLightbox();
+    document.getElementById('lightbox')?.classList.add('is-open');
+}
+
+function navigate(dir) {
+    currentIndex = (currentIndex + dir + galleryCards.length) % galleryCards.length;
+    renderLightbox();
+}
+
+function renderLightbox() {
+    const card    = galleryCards[currentIndex];
+    const thumb   = card.querySelector('img');
+    const descEl  = card.querySelector('.desc');
     const fullImg = document.getElementById('lightbox-img');
     const caption = document.getElementById('lightbox-caption');
+    const counter = document.getElementById('lightbox-counter');
 
-    const thumb = element.querySelector('img');
-    const descEl = element.querySelector('.desc');
+    if (!thumb || !fullImg) return;
 
-    if (!(thumb && lightbox && fullImg)) return;
-
-    lightbox.classList.add('is-open');
-
-    const fullSrc = thumb.getAttribute('data-full') || thumb.src;
-    fullImg.src = fullSrc;
+    fullImg.src = thumb.getAttribute('data-full') || thumb.src;
 
     if (caption) {
         caption.textContent = '';
@@ -42,6 +59,16 @@ function openLightbox(element) {
         caption.appendChild(label);
         caption.appendChild(document.createTextNode(' ' + (descEl ? descEl.textContent : 'Image Record')));
     }
+
+    if (counter) {
+        counter.textContent = `[ ${currentIndex + 1} / ${galleryCards.length} ]`;
+    }
+
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    const show = galleryCards.length > 1;
+    if (prevBtn) prevBtn.style.display = show ? '' : 'none';
+    if (nextBtn) nextBtn.style.display = show ? '' : 'none';
 }
 
 function closeLightbox() {

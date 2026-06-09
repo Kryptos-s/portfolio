@@ -482,6 +482,24 @@ a:hover {
     position: absolute; top: 15px; right: 35px;
     color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer;
 }
+.lightbox-prev, .lightbox-next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: transparent; border: 2px solid var(--color-accent);
+    color: var(--color-accent); font-size: 1.8em; cursor: pointer;
+    padding: 0.2em 0.5em; font-family: var(--font-primary);
+    transition: background var(--transition-speed), color var(--transition-speed);
+    z-index: 10000;
+}
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover, .lightbox-next:hover {
+    background: var(--color-accent); color: var(--color-bg);
+}
+.lightbox-counter {
+    display: block; text-align: center;
+    color: var(--color-text-secondary); font-size: 0.85em;
+    margin-top: 6px; font-family: var(--font-primary);
+}
 
 /* ------------------------------------
    11. Contact Form
