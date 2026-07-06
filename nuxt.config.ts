@@ -3,6 +3,20 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-01',
   devtools: { enabled: true },
 
+  modules: ['@nuxtjs/color-mode'],
+
+  css: ['~/assets/css/styles.css'],
+
+  // Theme lives on <html data-theme="...">, set before paint (no flash).
+  // Replaces the old public/js/theme-init.js.
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    dataValue: 'theme',
+    classSuffix: '',
+    storageKey: 'theme'
+  },
+
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
