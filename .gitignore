@@ -1,6 +1,13 @@
 # Dependency directories
 node_modules/
 
+# Nuxt / Nitro build output
+.nuxt/
+.output/
+.data/
+.nitro/
+dist/
+
 # Environment variables (NEVER commit this)
 .env
 
