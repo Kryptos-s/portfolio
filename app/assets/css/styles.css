@@ -62,11 +62,14 @@ body {
     color: var(--color-text-primary);
     background-color: var(--color-bg);
     transition: background-color var(--transition-speed), color var(--transition-speed);
+    min-height: 100vh;
+}
 
-    /* NEW: Flexbox Sticky Footer Setup */
+/* Nuxt mounts the app inside #__nuxt, so the sticky-footer flex lives here. */
+#__nuxt {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Forces body to be at least as tall as the screen */
+    min-height: 100vh;
 }
 
 h1, h2, h3 {
