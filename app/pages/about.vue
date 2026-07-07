@@ -68,7 +68,7 @@ const toolbox = [
 <template>
   <div>
     <section class="hero">
-      <h1 class="rise rise-1">About</h1>
+      <h1 class="page-title rise rise-1">About</h1>
       <div class="bio rise rise-2">
         <p>
           I'm <strong>Kryptos</strong>, a first-year networking and CS student at

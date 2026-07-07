@@ -48,12 +48,19 @@ function openAt(i: number) {
 
 <template>
   <div>
-    <section class="hero">
-      <h1 class="rise rise-1">The lab</h1>
-      <p class="hero-sub rise rise-2">
-        One primary analysis cluster. Used for malware analysis,
-        DMA-based memory forensics and whatever needs a disposable VM.
-      </p>
+    <section class="hero hero-split">
+      <div>
+        <h1 class="page-title rise rise-1">Lab</h1>
+        <p class="hero-sub rise rise-2">
+          One primary analysis cluster. Used for malware analysis,
+          DMA-based memory forensics and whatever needs a disposable VM.
+        </p>
+      </div>
+      <div class="hero-visual rise rise-3">
+        <ClientOnly>
+          <WireFrame />
+        </ClientOnly>
+      </div>
     </section>
 
     <section v-fade-in class="section section-fade-in" style="margin-top: 48px;">

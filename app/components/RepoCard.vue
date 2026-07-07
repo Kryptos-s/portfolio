@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Renders one repository as a full-width editorial index row.
 export interface Repo {
   name: string
   description: string | null
@@ -23,27 +24,14 @@ function safeUrl(url: string) {
 
 const description = computed(() => props.repo.description || 'No description yet.')
 const language = computed(() => props.repo.language || 'Text')
-const updated = computed(() =>
-  new Date(props.repo.updated).toLocaleDateString('en-GB', {
-    month: 'short',
-    year: 'numeric'
-  })
-)
 const href = computed(() => safeUrl(props.repo.url))
 </script>
 
 <template>
-  <a :href="href" target="_blank" rel="noopener noreferrer" class="card repo-card">
-    <slot name="flag" />
-    <h3>
-      <span>{{ repo.name }}</span>
-      <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-    </h3>
-    <p class="repo-desc">{{ description }}</p>
-    <div class="repo-meta">
-      <span class="lang">{{ language }}</span>
-      <span v-if="repo.stars > 0">★ {{ repo.stars }}</span>
-      <span>{{ updated }}</span>
-    </div>
+  <a :href="href" target="_blank" rel="noopener noreferrer" class="work-row">
+    <span class="work-name">{{ repo.name }}</span>
+    <span class="work-desc">{{ description }}</span>
+    <span class="work-lang">{{ language }}</span>
+    <svg class="work-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
   </a>
 </template>

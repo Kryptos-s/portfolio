@@ -5,40 +5,32 @@ useHead({ title: 'Kryptos - Cybersecurity & Reverse Engineering' })
 useSeoMeta({ description: 'Kryptos. Cybersecurity student and reverse engineer building low-level tools in C, C++ and Rust.' })
 
 const { data: repos } = await useFetch<Repo[]>('/api/github-repos')
-const featured = computed(() => (repos.value || [])[0])
-const rest = computed(() => (repos.value || []).slice(1, 5))
+const work = computed(() => (repos.value || []).slice(0, 5))
 </script>
 
 <template>
   <div>
-    <section class="hero hero-home">
-      <div>
-        <p class="hero-status rise rise-1">// now: wrapping up a C++ networking project</p>
-        <h1 class="rise rise-2">Cybersecurity student<br>&amp; <span class="sheen">reverse engineer</span>.</h1>
-        <p class="hero-sub rise rise-3">
-          I'm Kryptos. I build networking tools in C, C++ and Rust,
-          and spend my nights taking binaries apart.
-        </p>
-        <div class="hero-actions rise rise-4">
-          <NuxtLink v-magnetic to="/projects" class="button primary">View projects</NuxtLink>
-          <NuxtLink v-magnetic to="/about" class="button secondary">More about me</NuxtLink>
-        </div>
-      </div>
-      <div class="hero-visual rise rise-5">
-        <ClientOnly>
-          <WireFrame />
-        </ClientOnly>
+    <section class="hero">
+      <p class="hero-status rise rise-1">// now: wrapping up a C++ networking project</p>
+      <h1 class="wordmark rise rise-2">Kryptos</h1>
+      <div class="hero-role rise rise-3">
+        <span>cybersecurity · reverse engineering · c-family</span>
+        <span>student @ spse presov</span>
       </div>
     </section>
 
-    <section v-if="repos?.length" v-fade-in class="section section-fade-in">
-      <h2 class="section-title">Selected work</h2>
-      <p class="section-lede">Recent repositories, pulled straight from GitHub.</p>
-      <div v-stagger class="grid-2 cascade">
-        <RepoCard v-if="featured" v-spotlight :repo="featured" class="repo-feature">
-          <template #flag><span class="feature-flag">latest push</span></template>
-        </RepoCard>
-        <RepoCard v-for="repo in rest" :key="repo.name" v-spotlight :repo="repo" />
+    <section v-fade-in class="section section-fade-in">
+      <p class="statement">
+        I take binaries apart to see how they work.
+        <span class="dim">Then I build things that hold together.</span>
+      </p>
+    </section>
+
+    <section v-if="work.length" v-fade-in class="section section-fade-in">
+      <h2 class="section-title">Work</h2>
+      <p class="section-lede">Pulled live from GitHub. Crackme writeups live on <a href="https://crackmes.one/records/Kryptos-s" target="_blank" rel="noopener noreferrer">crackmes.one</a>.</p>
+      <div v-stagger class="work-rows cascade">
+        <RepoCard v-for="repo in work" :key="repo.name" :repo="repo" />
       </div>
     </section>
 

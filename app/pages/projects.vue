@@ -10,7 +10,7 @@ const { data: repos, error, status } = await useFetch<Repo[]>('/api/github-repos
 <template>
   <div>
     <section class="hero">
-      <h1 class="rise rise-1">Projects</h1>
+      <h1 class="page-title rise rise-1">Projects</h1>
       <p class="hero-sub rise rise-2">
         Public repositories, pulled live from GitHub.
         Writeups for solved crackmes live on
@@ -19,8 +19,8 @@ const { data: repos, error, status } = await useFetch<Repo[]>('/api/github-repos
     </section>
 
     <section class="section" style="margin-top: 48px;">
-      <div v-if="status === 'pending'" class="grid-2" aria-hidden="true">
-        <div v-for="n in 4" :key="n" class="skeleton" />
+      <div v-if="status === 'pending'" aria-hidden="true">
+        <div v-for="n in 5" :key="n" class="skeleton" style="min-height: 92px; margin-bottom: 12px;" />
       </div>
 
       <p v-else-if="error || !repos" class="state-note error">
@@ -31,8 +31,8 @@ const { data: repos, error, status } = await useFetch<Repo[]>('/api/github-repos
         // no public repositories found.
       </p>
 
-      <div v-else v-fade-in v-stagger class="grid-2 cascade section-fade-in">
-        <RepoCard v-for="repo in repos" :key="repo.name" v-spotlight :repo="repo" />
+      <div v-else v-fade-in v-stagger class="work-rows cascade section-fade-in">
+        <RepoCard v-for="repo in repos" :key="repo.name" :repo="repo" />
       </div>
     </section>
   </div>
