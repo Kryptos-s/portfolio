@@ -88,8 +88,8 @@ const toolbox = [
     <section v-fade-in class="section section-fade-in">
       <h2 class="section-title">Skills</h2>
       <p class="section-lede">What I'm comfortable with, roughly.</p>
-      <div class="grid-3">
-        <div v-for="group in skillGroups" :key="group.title" class="card skill-group">
+      <div v-stagger class="grid-3 cascade">
+        <div v-for="group in skillGroups" :key="group.title" v-spotlight class="card skill-group">
           <h3>{{ group.title }}</h3>
           <ul class="skill-list">
             <li v-for="skill in group.items" :key="skill.name">
@@ -115,7 +115,7 @@ const toolbox = [
     <section v-fade-in class="section section-fade-in">
       <h2 class="section-title">Day-to-day toolbox</h2>
       <p class="section-lede">The stuff I actually use for dev and security work.</p>
-      <div class="grid-3 toolbox">
+      <div v-stagger class="grid-3 toolbox cascade">
         <div v-for="group in toolbox" :key="group.title" class="toolbox-col">
           <h3>{{ group.title }}</h3>
           <ul class="tool-list">

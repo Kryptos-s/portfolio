@@ -6,11 +6,14 @@ useSeoMeta({
   description: 'The Kryptos homelab: Ryzen 9 9950X analysis box on Proxmox behind Ubiquiti gear.'
 })
 
-const specs = [
-  { name: 'Compute', value: 'AMD Ryzen 9 9950X', detail: '16 cores / 32 threads, Zen 5' },
-  { name: 'Memory', value: '256GB DDR5', detail: 'Running at 6000MHz' },
-  { name: 'Virtualization', value: 'Proxmox VE 8', detail: 'KVM and LXC workloads' }
-]
+// Count-up numerals for the two numeric tiles; armed when the row scrolls in.
+const cores = useCountUp(16, 700)
+const memory = useCountUp(256, 900)
+const specRow = ref<HTMLElement>()
+onMounted(() => {
+  cores.arm(specRow.value ?? null)
+  memory.arm(specRow.value ?? null)
+})
 
 const network = [
   { name: 'Edge gateway', value: 'Ubiquiti UDM Pro', detail: '10G SFP+ uplink' },
@@ -54,11 +57,24 @@ function openAt(i: number) {
     </section>
 
     <section v-fade-in class="section section-fade-in" style="margin-top: 48px;">
-      <div class="grid-3">
-        <div v-for="spec in specs" :key="spec.name" class="spec-tile">
-          <span class="spec-name">{{ spec.name }}</span>
-          <p class="spec-value">{{ spec.value }}</p>
-          <p class="spec-detail">{{ spec.detail }}</p>
+      <div ref="specRow" v-stagger class="grid-3 cascade">
+        <div v-spotlight class="spec-tile">
+          <span class="spec-name">Compute</span>
+          <p class="spec-num">{{ cores.value.value }}<span class="unit">cores</span></p>
+          <p class="spec-value">AMD Ryzen 9 9950X</p>
+          <p class="spec-detail">Zen 5, 32 threads</p>
+        </div>
+        <div v-spotlight class="spec-tile">
+          <span class="spec-name">Memory</span>
+          <p class="spec-num">{{ memory.value.value }}<span class="unit">GB</span></p>
+          <p class="spec-value">DDR5</p>
+          <p class="spec-detail">Running at 6000MHz</p>
+        </div>
+        <div v-spotlight class="spec-tile">
+          <span class="spec-name">Virtualization</span>
+          <p class="spec-num">8<span class="unit">VE</span></p>
+          <p class="spec-value">Proxmox</p>
+          <p class="spec-detail">KVM and LXC workloads</p>
         </div>
       </div>
     </section>

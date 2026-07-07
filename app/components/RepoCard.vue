@@ -34,6 +34,7 @@ const href = computed(() => safeUrl(props.repo.url))
 
 <template>
   <a :href="href" target="_blank" rel="noopener noreferrer" class="card repo-card">
+    <slot name="flag" />
     <h3>
       <span>{{ repo.name }}</span>
       <svg class="arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>

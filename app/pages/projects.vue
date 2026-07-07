@@ -31,8 +31,8 @@ const { data: repos, error, status } = await useFetch<Repo[]>('/api/github-repos
         // no public repositories found.
       </p>
 
-      <div v-else class="grid-2">
-        <RepoCard v-for="repo in repos" :key="repo.name" :repo="repo" />
+      <div v-else v-fade-in v-stagger class="grid-2 cascade section-fade-in">
+        <RepoCard v-for="repo in repos" :key="repo.name" v-spotlight :repo="repo" />
       </div>
     </section>
   </div>

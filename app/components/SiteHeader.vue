@@ -5,14 +5,69 @@ const links = [
   { to: '/projects', label: 'Projects' },
   { to: '/lab', label: 'Lab' }
 ]
+
+const route = useRoute()
+const navEl = ref<HTMLElement>()
+const headerEl = ref<HTMLElement>()
+const scrolled = ref(false)
+
+// Sliding pill behind the active link: measure the active anchor and move the
+// pill to it. Re-measured on route change, resize, and font load.
+const pill = ref({ x: 0, w: 0, visible: false })
+
+function placePill() {
+  const nav = navEl.value
+  if (!nav) return
+  const active = nav.querySelector<HTMLElement>('.nav-link.active')
+  if (!active) {
+    pill.value = { ...pill.value, visible: false }
+    return
+  }
+  pill.value = { x: active.offsetLeft, w: active.offsetWidth, visible: true }
+}
+
+const pillStyle = computed(() => ({
+  transform: `translateX(${pill.value.x}px)`,
+  width: `${pill.value.w}px`,
+  opacity: pill.value.visible ? 1 : 0
+}))
+
+watch(() => route.path, () => nextTick(placePill))
+
+let sentinelIo: IntersectionObserver | null = null
+let resizeObs: ResizeObserver | null = null
+
+onMounted(() => {
+  nextTick(placePill)
+  // fonts change metrics; re-place once they're in
+  if (document.fonts?.ready) document.fonts.ready.then(placePill)
+
+  resizeObs = new ResizeObserver(placePill)
+  if (navEl.value) resizeObs.observe(navEl.value)
+
+  // header engages its border/background once the top sentinel scrolls away
+  const sentinel = document.getElementById('top-sentinel')
+  if (sentinel) {
+    sentinelIo = new IntersectionObserver((entries) => {
+      scrolled.value = !entries[0]!.isIntersecting
+    })
+    sentinelIo.observe(sentinel)
+  }
+})
+
+onBeforeUnmount(() => {
+  sentinelIo?.disconnect()
+  resizeObs?.disconnect()
+})
 </script>
 
 <template>
-  <header class="site-header">
+  <header ref="headerEl" class="site-header" :class="{ 'is-scrolled': scrolled }">
     <div class="container">
       <NuxtLink to="/" class="logo" title="Home"><span class="logo-prompt">$</span> kryptos</NuxtLink>
 
-      <nav class="main-nav" aria-label="Main">
+      <nav ref="navEl" class="main-nav" aria-label="Main">
+        <span class="nav-pill" :style="pillStyle" aria-hidden="true" />
         <NuxtLink
           v-for="link in links"
           :key="link.to"
