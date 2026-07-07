@@ -1,27 +1,39 @@
 <script setup lang="ts">
 import type { Repo } from '~/components/RepoCard.vue'
 
-useHead({ title: 'Kryptos Terminal - Projects' })
+useHead({ title: 'Projects - Kryptos' })
+useSeoMeta({ description: 'Public repositories by Kryptos, pulled live from GitHub.' })
 
-// Fetched during SSR via the Nitro proxy (which caches upstream GitHub calls).
 const { data: repos, error, status } = await useFetch<Repo[]>('/api/github-repos')
 </script>
 
 <template>
-  <section class="terminal-box section-fade-in is-visible">
-    <h2 class="with-cursor">$ git fetch --all</h2>
-    <p class="prompt-line">pulling repos from github...</p>
+  <div>
+    <section class="hero">
+      <h1 class="rise rise-1">Projects</h1>
+      <p class="hero-sub rise rise-2">
+        Public repositories, pulled live from GitHub.
+        Writeups for solved crackmes live on
+        <a href="https://crackmes.one/records/Kryptos-s" target="_blank" rel="noopener noreferrer">crackmes.one</a>.
+      </p>
+    </section>
 
-    <div id="project-gallery-grid" class="gallery-grid">
-      <p v-if="status === 'pending'">Connecting to secure socket...</p>
-
-      <div v-else-if="error || !repos" class="terminal-box">
-        <p class="error">// ERROR: {{ error?.message || 'System link to GitHub offline.' }}</p>
+    <section class="section" style="margin-top: 48px;">
+      <div v-if="status === 'pending'" class="grid-2" aria-hidden="true">
+        <div v-for="n in 4" :key="n" class="skeleton" />
       </div>
 
-      <p v-else-if="repos.length === 0" class="terminal-box">No repositories found.</p>
+      <p v-else-if="error || !repos" class="state-note error">
+        // github link offline. try again in a bit.
+      </p>
 
-      <RepoCard v-for="repo in repos" v-else :key="repo.name" :repo="repo" />
-    </div>
-  </section>
+      <p v-else-if="repos.length === 0" class="state-note">
+        // no public repositories found.
+      </p>
+
+      <div v-else class="grid-2">
+        <RepoCard v-for="repo in repos" :key="repo.name" :repo="repo" />
+      </div>
+    </section>
+  </div>
 </template>
