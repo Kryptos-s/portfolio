@@ -1,4 +1,7 @@
 <template>
+  <ClientOnly>
+    <ParticleBackground />
+  </ClientOnly>
   <SiteHeader />
   <div class="site-wrapper">
     <MainNav />
