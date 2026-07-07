@@ -45,22 +45,6 @@ function open(): Promise<sqlite3.Database> {
       database.run('PRAGMA busy_timeout = 5000')
 
       database.run(
-        `CREATE TABLE IF NOT EXISTS messages (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT NOT NULL,
-          email TEXT NOT NULL,
-          phone TEXT,
-          subject TEXT NOT NULL,
-          message TEXT NOT NULL,
-          ip TEXT,
-          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-        )`,
-        (err) => {
-          if (err) reject(err)
-        }
-      )
-
-      database.run(
         `CREATE TABLE IF NOT EXISTS visitor_logs (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           ip TEXT,
@@ -104,30 +88,6 @@ export function closeDatabase(): Promise<void> {
       g.__portfolioDb = undefined
       g.__portfolioDbInit = undefined
       resolve()
-    })
-  })
-}
-
-export interface MessageData {
-  name: string
-  email: string
-  phone?: string | null
-  subject: string
-  message: string
-  ip?: string | null
-}
-
-export async function insertMessage(data: MessageData): Promise<number> {
-  const db = await getDb()
-  return new Promise((resolve, reject) => {
-    const stmt = `
-      INSERT INTO messages (name, email, phone, subject, message, ip)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `
-    const params = [data.name, data.email, data.phone ?? null, data.subject, data.message, data.ip ?? null]
-    db.run(stmt, params, function (err) {
-      if (err) reject(err)
-      else resolve(this.lastID)
     })
   })
 }

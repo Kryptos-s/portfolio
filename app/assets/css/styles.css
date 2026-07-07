@@ -115,17 +115,6 @@ img { max-width: 100%; display: block; }
     margin-bottom: 40px;
 }
 
-/* mono micro-label: used sparingly (max 1 per 3 sections) */
-.mono-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    display: block;
-    margin-bottom: 14px;
-}
-
 /* ------------------------------------
    4. Header / nav
 ------------------------------------ */
@@ -228,13 +217,13 @@ img { max-width: 100%; display: block; }
     padding-top: 64px;
     padding-bottom: 24px;
 }
+/* sentence-length copy: --text-2 for WCAG AA; --text-3 stays label-only */
 .hero-status {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--text-3);
+    color: var(--text-2);
     margin-bottom: 28px;
 }
-.hero-status .accent { color: var(--accent); }
 .hero h1 {
     font-size: clamp(2.8rem, 7vw, 5rem);
     letter-spacing: -0.035em;
@@ -310,19 +299,6 @@ a.card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
     color: var(--text-3);
 }
 .repo-meta .lang { color: var(--accent); }
-
-/* tag pills */
-.tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--border-strong);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-2);
-    white-space: nowrap;
-}
 
 /* split section (text + image) */
 .split {
@@ -530,6 +506,9 @@ a.card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
     position: absolute;
     top: 20px;
     right: 28px;
+    background: none;
+    border: none;
+    font-family: inherit;
     font-size: 32px;
     line-height: 1;
     color: var(--text-2);
@@ -580,7 +559,7 @@ a.card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
 .state-note {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--text-3);
+    color: var(--text-2);
     padding: 32px;
     text-align: center;
     border: 1px dashed var(--border-strong);

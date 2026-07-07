@@ -64,6 +64,9 @@ function resize() {
   el.style.height = `${height}px`
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
   seedParticles()
+  // Resizing the canvas clears its bitmap; when the rAF loop is not running
+  // (reduced motion), repaint the static frame or the background goes blank.
+  if (!raf) draw()
 }
 
 function draw() {

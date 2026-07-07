@@ -87,7 +87,8 @@ function openAt(i: number) {
           tabindex="0"
           :aria-label="`Open ${photo.desc}`"
           @click="openAt(i)"
-          @keydown.enter="openAt(i)"
+          @keydown.enter.prevent="openAt(i)"
+          @keydown.space.prevent="openAt(i)"
         >
           <div class="img-frame">
             <img :src="photo.thumb" :alt="photo.alt" class="gallery-thumb" loading="lazy">
