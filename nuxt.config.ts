@@ -3,9 +3,20 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-01',
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/color-mode', 'nuxt-security'],
+  modules: ['nuxt-security'],
 
-  css: ['~/assets/css/styles.css'],
+  css: [
+    '@fontsource-variable/geist',
+    '@fontsource-variable/geist-mono',
+    '~/assets/css/styles.css'
+  ],
+
+  // Old slugs from the 7-page layout; keep links alive.
+  routeRules: {
+    '/contact': { redirect: { to: '/about', statusCode: 301 } },
+    '/gallery': { redirect: { to: '/lab', statusCode: 301 } },
+    '/uses': { redirect: { to: '/about', statusCode: 301 } }
+  },
 
   // Security: the strict, helmet-equivalent policy is applied in production (the
   // mode that actually gets deployed behind the Cloudflare Tunnel). In dev it is
@@ -27,11 +38,12 @@ export default defineNuxtConfig({
         contentSecurityPolicy: {
           'default-src': ["'self'"],
           // 'self' keeps parity with the old helmet config; the nonce lets Nuxt's
-          // inline hydration + color-mode scripts run under a strict script-src.
+          // inline hydration script run under a strict script-src.
           'script-src': ["'self'", "'nonce-{{nonce}}'"],
           // 'unsafe-inline' only for styles (Nuxt inlines critical CSS); styles can't execute JS.
           'style-src': ["'self'", "'unsafe-inline'"],
           'img-src': ["'self'", 'data:'],
+          'font-src': ["'self'"],
           'connect-src': ["'self'"],
           'object-src': ["'none'"],
           'frame-ancestors': ["'none'"],
@@ -40,25 +52,10 @@ export default defineNuxtConfig({
         },
         referrerPolicy: 'strict-origin-when-cross-origin'
       },
-      // Every API route: 60 / 15 min. Contact form tightened to 5 / 15 min below.
+      // Every API route: 60 / 15 min.
       rateLimiter: { tokensPerInterval: 60, interval: 900000, headers: true },
       requestSizeLimiter: { maxRequestSizeInBytes: 20000, maxUploadFileRequestInBytes: 20000 }
-    },
-    routeRules: {
-      '/api/contact': {
-        security: { rateLimiter: { tokensPerInterval: 5, interval: 900000, headers: true } }
-      }
     }
-  },
-
-  // Theme lives on <html data-theme="...">, set before paint (no flash).
-  // Replaces the old public/js/theme-init.js.
-  colorMode: {
-    preference: 'dark',
-    fallback: 'dark',
-    dataValue: 'theme',
-    classSuffix: '',
-    storageKey: 'theme'
   },
 
   app: {

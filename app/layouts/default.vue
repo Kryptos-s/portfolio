@@ -3,12 +3,10 @@
     <ParticleBackground />
   </ClientOnly>
   <SiteHeader />
-  <div class="site-wrapper">
-    <MainNav />
-    <main class="main-content">
+  <main class="page">
+    <div class="container">
       <slot />
-    </main>
-    <SiteSidebar />
-  </div>
+    </div>
+  </main>
   <SiteFooter />
 </template>

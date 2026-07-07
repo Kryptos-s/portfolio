@@ -11,7 +11,6 @@ interface Particle {
 }
 
 const canvas = ref<HTMLCanvasElement | null>(null)
-const colorMode = useColorMode()
 
 let ctx: CanvasRenderingContext2D | null = null
 let raf = 0
@@ -23,8 +22,11 @@ let rgb: [number, number, number] = [58, 142, 187]
 let reduced = false
 const mouse = { x: -9999, y: -9999 }
 
-const LINK_DIST = 140
-const MOUSE_DIST = 170
+const LINK_DIST = 150
+const MOUSE_DIST = 180
+const LINK_ALPHA = 0.1
+const MOUSE_ALPHA = 0.2
+const NODE_ALPHA = 0.34
 
 function hexToRgb(hex: string): [number, number, number] {
   const h = hex.trim().replace('#', '')
@@ -34,18 +36,19 @@ function hexToRgb(hex: string): [number, number, number] {
 }
 
 function readAccent() {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue('--color-accent')
+  const raw = getComputedStyle(document.documentElement).getPropertyValue('--accent')
   if (raw) rgb = hexToRgb(raw)
 }
 
 function seedParticles() {
-  // Scale count to viewport area, capped for performance.
-  const count = Math.min(Math.floor((width * height) / 15000), 110)
+  // Scale count to viewport area, capped for performance. Kept sparse and slow:
+  // the field should read as texture, not as a foreground effect.
+  const count = Math.min(Math.floor((width * height) / 24000), 70)
   particles = Array.from({ length: count }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    vx: (Math.random() - 0.5) * 0.45,
-    vy: (Math.random() - 0.5) * 0.45
+    vx: (Math.random() - 0.5) * 0.28,
+    vy: (Math.random() - 0.5) * 0.28
   }))
 }
 
@@ -85,7 +88,7 @@ function draw() {
       const dy = p.y - q.y
       const dist = Math.hypot(dx, dy)
       if (dist < LINK_DIST) {
-        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(1 - dist / LINK_DIST) * 0.22})`
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(1 - dist / LINK_DIST) * LINK_ALPHA})`
         ctx.lineWidth = 1
         ctx.beginPath()
         ctx.moveTo(p.x, p.y)
@@ -99,7 +102,7 @@ function draw() {
     const mdy = p.y - mouse.y
     const mdist = Math.hypot(mdx, mdy)
     if (mdist < MOUSE_DIST) {
-      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(1 - mdist / MOUSE_DIST) * 0.35})`
+      ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${(1 - mdist / MOUSE_DIST) * MOUSE_ALPHA})`
       ctx.lineWidth = 1
       ctx.beginPath()
       ctx.moveTo(p.x, p.y)
@@ -108,9 +111,9 @@ function draw() {
     }
 
     // Node.
-    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.6)`
+    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${NODE_ALPHA})`
     ctx.beginPath()
-    ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2)
+    ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2)
     ctx.fill()
   }
 }
@@ -173,9 +176,6 @@ onMounted(() => {
   document.addEventListener('visibilitychange', onVisibility)
 })
 
-// Re-read the accent colour after a theme switch (data-theme drives the CSS var).
-watch(() => colorMode.value, () => nextTick(readAccent))
-
 onBeforeUnmount(() => {
   stop()
   clearTimeout(resizeTimer)
@@ -189,14 +189,3 @@ onBeforeUnmount(() => {
 <template>
   <canvas ref="canvas" class="particle-bg" aria-hidden="true" />
 </template>
-
-<style scoped>
-.particle-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-</style>
