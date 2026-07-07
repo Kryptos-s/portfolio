@@ -41,14 +41,18 @@ export default defineNuxtPlugin((nuxtApp) => {
     mounted(el: HTMLElement) {
       if (reduced()) return
       const strength = 0.18
+      // write custom properties, not transform, so stylesheet transforms
+      // (e.g. .button:active { scale }) still compose with the magnet offset
       const move = (e: PointerEvent) => {
         const r = el.getBoundingClientRect()
         const dx = e.clientX - (r.left + r.width / 2)
         const dy = e.clientY - (r.top + r.height / 2)
-        el.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`
+        el.style.setProperty('--tx', `${(dx * strength).toFixed(1)}px`)
+        el.style.setProperty('--ty', `${(dy * strength).toFixed(1)}px`)
       }
       const leave = () => {
-        el.style.transform = ''
+        el.style.setProperty('--tx', '0px')
+        el.style.setProperty('--ty', '0px')
       }
       el.classList.add('magnetic')
       el.addEventListener('pointermove', move, { passive: true })
@@ -81,58 +85,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   })
 
-  // --- v-parallax -------------------------------------------------------
-  // Gentle depth drift for media while it crosses the viewport. Driven by a
-  // scroll-linked rAF that only runs while the element is on screen (armed by
-  // IntersectionObserver, no scroll listeners).
-  interface ParallaxState {
-    io: IntersectionObserver
-    stop: () => void
-  }
-  const parallaxed = new WeakMap<HTMLElement, ParallaxState>()
-
-  nuxtApp.vueApp.directive('parallax', {
-    mounted(el: HTMLElement) {
-      if (reduced()) return
-      const depth = 0.08
-      let running = false
-      let raf = 0
-
-      const tick = () => {
-        if (!running) return
-        const r = el.getBoundingClientRect()
-        const mid = r.top + r.height / 2 - window.innerHeight / 2
-        el.style.transform = `translateY(${(-mid * depth).toFixed(1)}px)`
-        raf = requestAnimationFrame(tick)
-      }
-
-      // stop() lives in the closure so unmount always cancels the CURRENT
-      // frame id, not a stale snapshot.
-      const stop = () => {
-        running = false
-        cancelAnimationFrame(raf)
-      }
-
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !running) {
-            running = true
-            raf = requestAnimationFrame(tick)
-          } else if (!entry.isIntersecting && running) {
-            stop()
-          }
-        })
-      })
-      io.observe(el)
-      parallaxed.set(el, { io, stop })
-    },
-    unmounted(el: HTMLElement) {
-      const s = parallaxed.get(el)
-      if (s) {
-        s.io.disconnect()
-        s.stop()
-      }
-      parallaxed.delete(el)
-    }
-  })
+  // (Parallax is handled in pure CSS via animation-timeline: view() — see
+  // styles.css. No JS loop: the compositor drives it, idle cost is zero, and
+  // browsers without support simply render the image static.)
 })

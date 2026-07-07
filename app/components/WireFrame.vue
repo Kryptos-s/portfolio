@@ -94,8 +94,13 @@ function frame() {
   }
 }
 
+// Anchor the clock so the first animated frame continues exactly from the
+// pose of the static frame (t = 4200) instead of snapping to a new angle.
+let t0: number | null = null
+
 function loop(now: number) {
-  t = now
+  if (t0 === null) t0 = now - 4200
+  t = now - t0
   frame()
   raf = requestAnimationFrame(loop)
 }
@@ -116,6 +121,20 @@ function onVisibility() {
 }
 
 let io: IntersectionObserver | null = null
+let ro: ResizeObserver | null = null
+
+// (Re)size the backing store to the rendered CSS size so lines stay crisp at
+// any viewport width; repaint immediately when the loop isn't running.
+function fit(el: HTMLCanvasElement) {
+  const w = el.clientWidth
+  if (!ctx || w <= 0 || w === size) return
+  size = w
+  dpr = Math.min(window.devicePixelRatio || 1, 2)
+  el.width = Math.floor(size * dpr)
+  el.height = Math.floor(size * dpr)
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+  if (!raf) frame()
+}
 
 onMounted(() => {
   const el = canvas.value
@@ -137,6 +156,10 @@ onMounted(() => {
   // for the observer/rAF to kick in (or forever, under reduced motion)
   t = 4200 // an angle that reads well as a still
   frame()
+
+  ro = new ResizeObserver(() => fit(el))
+  ro.observe(el)
+
   if (reduced) return
 
   io = new IntersectionObserver((entries) => {
@@ -153,6 +176,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   stop()
   io?.disconnect()
+  ro?.disconnect()
   document.removeEventListener('visibilitychange', onVisibility)
 })
 </script>

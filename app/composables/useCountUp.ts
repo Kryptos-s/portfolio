@@ -1,7 +1,9 @@
-// Animates a number from 0 to `target` when `arm(el)` sees the element enter
-// the viewport. Ease-out cubic via rAF; instant under prefers-reduced-motion.
+// Animates a number up to `target` when `arm(el)` sees the element enter the
+// viewport. Ease-out cubic via rAF; instant under prefers-reduced-motion.
+// The ref starts AT the target so SSR HTML (and no-JS visitors) read the real
+// value; it only dips to 0 on the client right as the animation begins.
 export function useCountUp(target: number, durationMs = 900) {
-  const value = ref(0)
+  const value = ref(target)
   let started = false
   let io: IntersectionObserver | null = null
   let raf = 0
@@ -16,6 +18,8 @@ export function useCountUp(target: number, durationMs = 900) {
       value.value = target
       return
     }
+
+    value.value = 0
 
     const t0 = performance.now()
     const tick = (now: number) => {

@@ -170,7 +170,19 @@ img { max-width: 100%; display: block; }
     transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
 }
 .nav-link:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+/* active state: accent underline gives a >3:1 cue (WCAG 1.4.11); the sliding
+   pill is decorative reinforcement, aria-current comes from the router */
 .nav-link.active { color: var(--text); }
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 3px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--accent);
+}
 /* sliding active pill, measured + moved by SiteHeader */
 .nav-pill {
     position: absolute;
@@ -240,9 +252,16 @@ img { max-width: 100%; display: block; }
 }
 .button.primary:hover::after { transform: translateX(120%); }
 
-/* magnetic elements ease back when the cursor leaves */
-.magnetic { transition: transform 0.35s var(--ease); }
+/* magnetic elements: offset comes from --tx/--ty custom props so stylesheet
+   transforms (like the :active press) compose instead of being overwritten */
+.magnetic {
+    transform: translate(var(--tx, 0px), var(--ty, 0px));
+    transition: transform 0.35s var(--ease);
+}
 .magnetic:hover { transition: transform 0.08s linear; }
+.magnetic.button:active {
+    transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.98);
+}
 
 .button.secondary {
     background: transparent;
@@ -313,7 +332,9 @@ img { max-width: 100%; display: block; }
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: sheen 9s var(--ease) infinite;
+    /* finite: background-position is a paint property; three passes on load,
+       then the compositor goes quiet */
+    animation: sheen 9s var(--ease) 3;
 }
 @keyframes sheen {
     0%, 55% { background-position: 120% 0; }
@@ -478,6 +499,20 @@ a.card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
     border: 1px solid var(--border);
 }
 .split-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* parallax drift via native scroll-driven animation: compositor-only, zero JS,
+   static image in browsers without support */
+@supports (animation-timeline: view()) {
+    .split-media img {
+        animation: parallax-drift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% exit 100%;
+    }
+    @keyframes parallax-drift {
+        from { transform: translateY(4%) scale(1.09); }
+        to { transform: translateY(-4%) scale(1.09); }
+    }
+}
 
 /* ------------------------------------
    8. About page
@@ -895,7 +930,13 @@ html { scrollbar-width: thin; scrollbar-color: var(--surface-2) transparent; }
     .logo:hover .logo-prompt { animation: none; }
     .button.primary::after { display: none; }
     .lightbox.is-open .lightbox-content { animation: none; }
-    * { transition-duration: 0.01ms !important; }
+    .split-media img { animation: none; }
+    /* catch-all incl. pseudo-elements (link underlines, spotlight fades) */
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
 
 /* ------------------------------------

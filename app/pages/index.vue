@@ -53,7 +53,7 @@ const rest = computed(() => (repos.value || []).slice(1, 5))
           </p>
           <NuxtLink v-magnetic to="/lab" class="button secondary">Tour the lab</NuxtLink>
         </div>
-        <div v-parallax class="split-media">
+        <div class="split-media">
           <img src="/images/setup.jpg" alt="The Arch Linux workstation where most of the work happens" loading="lazy">
         </div>
       </div>

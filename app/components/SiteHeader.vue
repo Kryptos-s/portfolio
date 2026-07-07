@@ -49,7 +49,8 @@ onMounted(() => {
   const sentinel = document.getElementById('top-sentinel')
   if (sentinel) {
     sentinelIo = new IntersectionObserver((entries) => {
-      scrolled.value = !entries[0]!.isIntersecting
+      // batched callbacks deliver oldest-first; the newest record is truth
+      scrolled.value = !entries[entries.length - 1]!.isIntersecting
     })
     sentinelIo.observe(sentinel)
   }
