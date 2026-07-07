@@ -404,10 +404,19 @@ a.card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
 .timeline-item h3 { font-size: 1.05rem; margin-bottom: 4px; }
 .timeline-item p { font-size: 0.95rem; }
 
-/* toolbox */
-.tool-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.tool-list li { font-size: 0.92rem; color: var(--text-2); }
-.tool-list li strong { color: var(--text); font-weight: 550; }
+/* toolbox: open columns, grouped by whitespace (no cards on purpose) */
+.toolbox { border-top: 1px solid var(--border); padding-top: 36px; }
+.toolbox-col h3 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+.tool-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tool-list li { font-size: 0.95rem; color: var(--text-2); }
 
 /* ------------------------------------
    9. Lab page
@@ -437,6 +446,30 @@ a.card:hover .arrow { color: var(--accent); transform: translate(2px, -2px); }
     font-size: 0.88rem;
     color: var(--text-2);
     margin-top: 6px;
+}
+
+/* network: open rows, one hairline between (deliberately not tiles) */
+.net-rows { max-width: 760px; }
+.net-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding: 18px 0;
+}
+.net-row + .net-row { border-top: 1px solid var(--border); }
+.net-role {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+.net-device { font-weight: 600; color: var(--text); }
+.net-detail { font-size: 0.9rem; color: var(--text-2); }
+
+@media (max-width: 640px) {
+    .net-row { grid-template-columns: 1fr; gap: 2px; }
 }
 
 /* photo grid */
