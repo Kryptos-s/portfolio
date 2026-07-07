@@ -17,11 +17,13 @@
   "dependencies": {
     "nuxt": "^4.0.0",
     "sqlite3": "^5.1.7",
+    "validator": "^13.15.35",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.5.2",
+    "@types/validator": "^13.15.10",
     "nuxt-security": "^2.2.0"
   }
 }
