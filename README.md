@@ -13,11 +13,10 @@
 
 ## About
 
-skipped the usual "about me" page and built a terminal-style site instead.
+personal site. dark, minimal, a little terminal flavor left in the details.
 
-rebuilt on Nuxt now. still the same terminal look, just componentised — the pages,
-the theme switcher, the hero typewriter, the gallery lightbox, the contact form.
-the little API (contact form + github proxy) runs on Nuxt's Nitro server.
+runs on Nuxt. four pages (home / about / projects / lab), repos pulled live
+from GitHub through a small Nitro proxy. no contact form, just an email link.
 
 nothing's exposed directly. traffic comes through a Cloudflare Tunnel, so the box
 never has an open public port.
@@ -26,10 +25,10 @@ never has an open public port.
 
 ## What's in here
 
-- terminal-style UI, kinda like a shell prompt
+- dark-only design, Geist + Geist Mono, self-hosted fonts
 - Nuxt (Vue 3) frontend, SSR
-- small Nitro API for the contact form and a github proxy
-- SQLite for storing messages + visitor logs
+- small Nitro API: github proxy + visitor log
+- SQLite for visitor logs
 - server only listens on 127.0.0.1, all traffic comes through a Cloudflare Tunnel
 - strict CSP + rate limiting via nuxt-security
 
@@ -40,7 +39,7 @@ never has an open public port.
 - framework: Nuxt 4 (Vue 3)
 - server: Nitro (node)
 - db: SQLite
-- theming: @nuxtjs/color-mode (dark / light / purple)
+- type: Geist / Geist Mono via fontsource (self-hosted, CSP-friendly)
 - security: nuxt-security (helmet-style CSP, rate limiting), same-origin checks
 - ingress: Cloudflare Tunnel (Zero Trust)
 
@@ -119,7 +118,6 @@ the backend never gets a public IP. all traffic goes through Cloudflare's edge.
 ## API
 
 - `GET /api/github-repos` — cached github proxy (5 min, serves stale on upstream failure)
-- `POST /api/contact` — validated contact form, stored in SQLite
 - `POST /api/log-visit` — basic visitor telemetry
 
 all POST routes are same-origin only and rate limited in production.
