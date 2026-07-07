@@ -8,38 +8,38 @@ const skillGroups = [
   {
     title: 'Languages',
     items: [
-      { name: 'C / C++ / C#', level: 'advanced' },
-      { name: 'Rust / Python', level: 'intermediate' },
-      { name: 'HTML / JS / TS', level: 'beginner' }
+      { name: 'C / C++ / C#', level: 'ADV' },
+      { name: 'Rust / Python', level: 'INT' },
+      { name: 'HTML / JS / TS', level: 'BEG' }
     ]
   },
   {
     title: 'Systems & Infra',
     items: [
-      { name: 'Docker / Proxmox / AWS', level: 'intermediate' },
-      { name: 'Nginx / Systemd', level: 'intermediate' },
-      { name: 'SQLite / MySQL', level: 'intermediate' }
+      { name: 'Docker / Proxmox / AWS', level: 'INT' },
+      { name: 'Nginx / Systemd', level: 'INT' },
+      { name: 'SQLite / MySQL', level: 'INT' }
     ]
   },
   {
     title: 'Security',
     items: [
-      { name: 'Metasploit / Nmap / BeEF', level: 'advanced' },
-      { name: 'Forensics / Reverse engineering', level: 'intermediate' },
-      { name: 'Offensive methodologies', level: 'intermediate' }
+      { name: 'Metasploit / Nmap / BeEF', level: 'ADV' },
+      { name: 'Forensics / Reverse engineering', level: 'INT' },
+      { name: 'Offensive methodologies', level: 'INT' }
     ]
   }
 ]
 
 const milestones = [
   {
-    date: '2025 - present',
+    date: '2025 - PRESENT',
     title: 'SPSE Presov',
     text: 'Networking and computer science, year one.'
   },
   {
-    date: '2024 - ongoing',
-    title: 'Reverse engineering record',
+    date: '2024 - ONGOING',
+    title: 'RE record',
     text: 'Posted solves on crackmes.one. Mostly grinding binary analysis.'
   },
   {
@@ -67,9 +67,13 @@ const toolbox = [
 
 <template>
   <div>
-    <section class="hero">
-      <h1 class="page-title rise rise-1">About</h1>
-      <div class="bio rise rise-2">
+    <section class="masthead container">
+      <div class="masthead-strip">
+        <span class="label rise rise-1">// cat about_me.txt</span>
+        <span class="label rise rise-1">IDENT: WITHHELD</span>
+      </div>
+      <h1 class="macro h-page rise rise-2">About</h1>
+      <div class="copy rise rise-3" style="margin-top: 32px;">
         <p>
           I'm <strong>Kryptos</strong>, a first-year networking and CS student at
           SPSE Presov. Most of my time goes into low-level systems and security
@@ -85,42 +89,54 @@ const toolbox = [
       </div>
     </section>
 
-    <section v-fade-in class="section section-fade-in">
-      <h2 class="section-title">Skills</h2>
-      <p class="section-lede">What I'm comfortable with, roughly.</p>
-      <div v-stagger class="grid-3 cascade">
-        <div v-for="group in skillGroups" :key="group.title" v-spotlight class="card skill-group">
-          <h3>{{ group.title }}</h3>
-          <ul class="skill-list">
-            <li v-for="skill in group.items" :key="skill.name">
-              <span>{{ skill.name }}</span>
-              <span class="skill-level" :class="{ adv: skill.level === 'advanced' }">{{ skill.level }}</span>
-            </li>
-          </ul>
+    <section v-fade-in class="zone section-fade-in" style="margin-top: 64px;">
+      <div class="container">
+        <div class="zone-head">
+          <h2 class="macro h-zone">[ Skills ]</h2>
+          <span class="label">SELF-ASSESSED / ROUGHLY</span>
+        </div>
+        <div v-stagger class="compartments grid-3 cascade">
+          <div v-for="group in skillGroups" :key="group.title" class="skill-group">
+            <h3>{{ group.title }}</h3>
+            <ul class="skill-list">
+              <li v-for="skill in group.items" :key="skill.name">
+                <span>{{ skill.name }}</span>
+                <span class="skill-tag" :class="{ adv: skill.level === 'ADV' }">[{{ skill.level }}]</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section v-fade-in class="section section-fade-in">
-      <h2 class="section-title">Milestones</h2>
-      <div class="timeline" style="margin-top: 40px;">
-        <div v-for="item in milestones" :key="item.title" class="timeline-item">
-          <span class="timeline-date">{{ item.date }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.text }}</p>
+    <section v-fade-in class="zone section-fade-in">
+      <div class="container">
+        <div class="zone-head">
+          <h2 class="macro h-zone">[ Milestones ]</h2>
+        </div>
+        <div class="mile-rows">
+          <div v-for="item in milestones" :key="item.title" class="mile-row">
+            <span class="mile-date">{{ item.date }}</span>
+            <span class="mile-title">{{ item.title }}</span>
+            <span class="mile-text">{{ item.text }}</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section v-fade-in class="section section-fade-in">
-      <h2 class="section-title">Day-to-day toolbox</h2>
-      <p class="section-lede">The stuff I actually use for dev and security work.</p>
-      <div v-stagger class="grid-3 toolbox cascade">
-        <div v-for="group in toolbox" :key="group.title" class="toolbox-col">
-          <h3>{{ group.title }}</h3>
-          <ul class="tool-list">
-            <li v-for="tool in group.items" :key="tool">{{ tool }}</li>
-          </ul>
+    <section v-fade-in class="zone section-fade-in">
+      <div class="container">
+        <div class="zone-head">
+          <h2 class="macro h-zone">[ Toolbox ]</h2>
+          <span class="label">DAY-TO-DAY LOADOUT</span>
+        </div>
+        <div v-stagger class="compartments grid-3 cascade">
+          <div v-for="group in toolbox" :key="group.title" class="skill-group">
+            <h3>{{ group.title }}</h3>
+            <ul class="skill-list">
+              <li v-for="tool in group.items" :key="tool">{{ tool }}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>

@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   modules: ['nuxt-security'],
 
   css: [
-    '@fontsource-variable/geist',
-    '@fontsource-variable/geist-mono',
+    '@fontsource/archivo-black',
+    '@fontsource-variable/jetbrains-mono',
     '~/assets/css/styles.css'
   ],
 

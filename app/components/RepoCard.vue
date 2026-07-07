@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Renders one repository as a full-width editorial index row.
+// One repository as an index-table row.
 export interface Repo {
   name: string
   description: string | null
@@ -9,7 +9,7 @@ export interface Repo {
   updated: string
 }
 
-const props = defineProps<{ repo: Repo }>()
+const props = defineProps<{ repo: Repo; idx: number }>()
 
 // Only allow http(s) links through, same guard as the original github.js safeUrl().
 function safeUrl(url: string) {
@@ -23,15 +23,17 @@ function safeUrl(url: string) {
 }
 
 const description = computed(() => props.repo.description || 'No description yet.')
-const language = computed(() => props.repo.language || 'Text')
+const language = computed(() => (props.repo.language || 'txt').toUpperCase())
 const href = computed(() => safeUrl(props.repo.url))
+const index = computed(() => String(props.idx + 1).padStart(2, '0'))
 </script>
 
 <template>
   <a :href="href" target="_blank" rel="noopener noreferrer" class="work-row">
+    <span class="work-idx">{{ index }}</span>
     <span class="work-name">{{ repo.name }}</span>
     <span class="work-desc">{{ description }}</span>
     <span class="work-lang">{{ language }}</span>
-    <svg class="work-arrow" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    <span class="work-arrow" aria-hidden="true">&gt;&gt;&gt;</span>
   </a>
 </template>
