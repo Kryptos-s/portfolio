@@ -87,7 +87,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   // IntersectionObserver, no scroll listeners).
   interface ParallaxState {
     io: IntersectionObserver
-    raf: number
+    stop: () => void
   }
   const parallaxed = new WeakMap<HTMLElement, ParallaxState>()
 
@@ -106,24 +106,31 @@ export default defineNuxtPlugin((nuxtApp) => {
         raf = requestAnimationFrame(tick)
       }
 
+      // stop() lives in the closure so unmount always cancels the CURRENT
+      // frame id, not a stale snapshot.
+      const stop = () => {
+        running = false
+        cancelAnimationFrame(raf)
+      }
+
       const io = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          running = entry.isIntersecting
-          if (running) {
+          if (entry.isIntersecting && !running) {
+            running = true
             raf = requestAnimationFrame(tick)
-          } else {
-            cancelAnimationFrame(raf)
+          } else if (!entry.isIntersecting && running) {
+            stop()
           }
         })
       })
       io.observe(el)
-      parallaxed.set(el, { io, raf })
+      parallaxed.set(el, { io, stop })
     },
     unmounted(el: HTMLElement) {
       const s = parallaxed.get(el)
       if (s) {
         s.io.disconnect()
-        cancelAnimationFrame(s.raf)
+        s.stop()
       }
       parallaxed.delete(el)
     }
