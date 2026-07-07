@@ -12,10 +12,13 @@
 set -euo pipefail
 
 # ------------------------------------------------------------------ config ----
-SERVICE="portfolio.service"           # your systemd unit name
-BRANCH="main"
-HEALTH_URL="http://127.0.0.1:3000/"   # set to "" to skip the post-restart check
-LOCK="/tmp/portfolio-deploy.lock"
+# All overridable from the environment (e.g. in the cron line) so you never have
+# to edit this tracked file on the server — editing it would trip the clean-tree
+# check below.
+SERVICE="${SERVICE:-portfolio.service}"            # your systemd unit name
+BRANCH="${BRANCH:-main}"
+HEALTH_URL="${HEALTH_URL-http://127.0.0.1:3000/}"  # set HEALTH_URL="" to skip the check
+LOCK="${LOCK:-/tmp/portfolio-deploy.lock}"
 
 # cron runs with a bare PATH; make sure git/node/npm/systemctl are findable.
 export PATH="/usr/local/bin:/usr/bin:/bin:${PATH:-}"
