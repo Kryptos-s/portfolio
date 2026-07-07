@@ -44,10 +44,17 @@ function trapTab(e: KeyboardEvent) {
   const list = [...focusables]
   const first = list[0]!
   const last = list[list.length - 1]!
-  if (e.shiftKey && document.activeElement === first) {
+  const active = document.activeElement
+  // Focus escaped the dialog (e.g. after clicking the backdrop): pull it back.
+  if (!active || !dialogEl.value?.contains(active)) {
+    e.preventDefault()
+    first.focus()
+    return
+  }
+  if (e.shiftKey && active === first) {
     e.preventDefault()
     last.focus()
-  } else if (!e.shiftKey && document.activeElement === last) {
+  } else if (!e.shiftKey && active === last) {
     e.preventDefault()
     first.focus()
   }
@@ -104,12 +111,13 @@ onUnmounted(() => {
       class="lightbox-prev"
       aria-label="Previous image"
       @click="navigate(-1)"
-    >&#10094;</button>
+    >&lt;&lt;</button>
 
     <img
+      v-if="open"
       id="lightbox-img"
       class="lightbox-content"
-      :src="open ? (current?.full || '') : ''"
+      :src="current?.full || ''"
       :alt="current?.alt || ''"
     >
 
@@ -118,11 +126,14 @@ onUnmounted(() => {
       class="lightbox-next"
       aria-label="Next image"
       @click="navigate(1)"
-    >&#10095;</button>
+    >&gt;&gt;</button>
 
-    <div id="lightbox-caption" class="lightbox-caption">
-      <span class="lightbox-label">// record:</span> {{ current?.desc || 'Image record' }}
+    <!-- polite live region so prev/next changes are announced -->
+    <div class="lightbox-meta" aria-live="polite">
+      <div id="lightbox-caption" class="lightbox-caption">
+        <span class="lightbox-label">// record:</span> {{ current?.desc || 'Image record' }}
+      </div>
+      <div id="lightbox-counter" class="lightbox-counter">[ {{ index + 1 }} / {{ photos.length }} ]</div>
     </div>
-    <div id="lightbox-counter" class="lightbox-counter">[ {{ index + 1 }} / {{ photos.length }} ]</div>
   </div>
 </template>

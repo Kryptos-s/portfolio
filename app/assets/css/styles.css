@@ -8,6 +8,44 @@ No radius. No shadows. No gradients. No glass.
 */
 
 /* ------------------------------------
+   0. Fonts (self-hosted, /public/fonts)
+   Latin subsets are preloaded from nuxt.config; latin-ext only downloads
+   when a glyph in its unicode-range appears.
+------------------------------------ */
+@font-face {
+    font-family: 'Archivo Black';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url('/fonts/archivo-black-latin-400-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: 'Archivo Black';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url('/fonts/archivo-black-latin-ext-400-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'JetBrains Mono Variable';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 800;
+    src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+    font-family: 'JetBrains Mono Variable';
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 800;
+    src: url('/fonts/jetbrains-mono-latin-ext-wght-normal.woff2') format('woff2-variations');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ------------------------------------
    1. Tokens
 ------------------------------------ */
 :root {
@@ -17,7 +55,7 @@ No radius. No shadows. No gradients. No glass.
     --bg: #0a0a0a;            /* deactivated CRT, never pure black */
     --fg: #eaeaea;            /* white phosphor */
     --fg-dim: #9a9aa0;        /* secondary readout */
-    --fg-faint: #55555c;      /* etched labels (3:1+ on bg, labels only) */
+    --fg-faint: #8a8a90;      /* etched labels (5.7:1 on bg; >=4.5:1 even inside a scanline row) */
 
     --line: rgba(234, 234, 234, 0.18);       /* compartment rules */
     --line-strong: rgba(234, 234, 234, 0.4); /* structural rules */
@@ -56,6 +94,21 @@ img { max-width: 100%; display: block; }
 /* visible keyboard focus */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+/* skip link: hidden until keyboard focus */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    z-index: 700;
+    padding: 12px 18px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+.skip-link:focus-visible { top: 0; color: var(--bg); }
+
 /* thin utilitarian scrollbar */
 html { scrollbar-width: thin; scrollbar-color: #2a2a2e transparent; }
 ::-webkit-scrollbar { width: 10px; }
@@ -74,8 +127,8 @@ html { scrollbar-width: thin; scrollbar-color: #2a2a2e transparent; }
         0deg,
         transparent,
         transparent 3px,
-        rgba(0, 0, 0, 0.14) 3px,
-        rgba(0, 0, 0, 0.14) 4px
+        rgba(0, 0, 0, 0.1) 3px,
+        rgba(0, 0, 0, 0.1) 4px
     );
 }
 .grain {
@@ -102,7 +155,8 @@ html { scrollbar-width: thin; scrollbar-color: #2a2a2e transparent; }
 }
 
 .giant {
-    font-size: clamp(4rem, 17.5vw, 15rem);
+    /* 3.4rem floor: 'KRYPTOS' must not break mid-word on 320px devices */
+    font-size: clamp(3.4rem, 17.5vw, 15rem);
     margin-left: -0.04em;
     overflow-wrap: anywhere;
 }
@@ -146,9 +200,9 @@ strong { color: var(--fg); font-weight: 700; }
     padding: 44px 0 72px;
     position: relative;
 }
-/* crosshair registration mark at the zone's top-left */
+/* crosshair registration mark at the zone's top-left ('/ ""' hides it from AT) */
 .zone::before {
-    content: '+';
+    content: '+' / '';
     position: absolute;
     top: -0.72em;
     left: -2px;
@@ -178,17 +232,6 @@ strong { color: var(--fg); font-weight: 700; }
     border: 1px solid var(--line);
 }
 .compartments > * { background: var(--bg); padding: 24px 22px; }
-
-/* dense data list (dl) */
-.data-list { display: grid; gap: 6px 18px; grid-template-columns: max-content 1fr; }
-.data-list dt {
-    font-size: 0.72rem;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--fg-faint);
-    padding-top: 2px;
-}
-.data-list dd { color: var(--fg); font-size: 0.85rem; }
 
 /* ------------------------------------
    6. Header
@@ -264,12 +307,24 @@ strong { color: var(--fg); font-weight: 700; }
     margin-bottom: 10px;
 }
 
+/* statement promoted into the masthead deck */
+.masthead .statement { margin-top: 30px; }
+
 /* dense spec block under the wordmark */
 .masthead-data {
     margin-top: 28px;
     grid-template-columns: repeat(4, 1fr);
 }
-.masthead-data .cell-label {
+/* action cell: the one clickable compartment in the masthead grid */
+.cell-link {
+    display: block;
+    transition: background-color var(--tick);
+}
+.cell-link .cell-value { color: var(--accent); transition: color var(--tick); }
+.cell-link:hover { background: var(--fg); }
+.cell-link:hover .cell-label { color: var(--bg); }
+.cell-link:hover .cell-value { color: var(--bg); }
+.cell-label {
     display: block;
     font-size: 0.68rem;
     letter-spacing: 0.1em;
@@ -277,7 +332,7 @@ strong { color: var(--fg); font-weight: 700; }
     color: var(--fg-faint);
     margin-bottom: 10px;
 }
-.masthead-data .cell-value { font-size: 0.9rem; color: var(--fg); line-height: 1.5; }
+.cell-value { font-size: 0.9rem; color: var(--fg); line-height: 1.5; }
 
 /* statement */
 .statement {
@@ -297,7 +352,7 @@ strong { color: var(--fg); font-weight: 700; }
 .work-rows { border-bottom: 1px solid var(--line-strong); }
 .work-row {
     display: grid;
-    grid-template-columns: 64px minmax(0, 6fr) minmax(0, 5fr) 110px 44px;
+    grid-template-columns: 64px minmax(0, 6fr) minmax(0, 5fr) 96px 90px 44px;
     align-items: center;
     gap: 20px;
     padding: 22px 0;
@@ -331,6 +386,15 @@ strong { color: var(--fg); font-weight: 700; }
     overflow: hidden;
     transition: color var(--tick);
 }
+.work-pushed {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--fg-faint);
+    white-space: nowrap;
+    transition: color var(--tick);
+}
 .work-lang {
     font-size: 0.72rem;
     letter-spacing: 0.08em;
@@ -351,9 +415,34 @@ strong { color: var(--fg); font-weight: 700; }
 .work-row:hover { background: var(--fg); }
 .work-row:hover .work-name,
 .work-row:hover .work-idx,
-.work-row:hover .work-desc { color: var(--bg); }
+.work-row:hover .work-desc,
+.work-row:hover .work-pushed { color: var(--bg); }
 .work-row:hover .work-lang { color: var(--bg); }
 .work-row:hover .work-arrow { color: var(--bg); transform: translateX(4px); }
+
+/* ------------------------------------
+   8b. Selected work (curated compartments)
+------------------------------------ */
+.sel-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px 32px; }
+.sel-name {
+    font-family: var(--font-macro);
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+    overflow-wrap: anywhere;
+}
+.sel-facts { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.sel-body { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.sel-body p { font-size: 0.88rem; color: var(--fg-dim); max-width: 62ch; }
+.sel-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.sel-links a { color: var(--accent); font-size: 0.75rem; letter-spacing: 0.09em; text-transform: uppercase; }
+.sel-links a:hover { background: var(--accent); color: var(--bg); }
+
+/* crackme record cells */
+.record-grid { grid-template-columns: repeat(5, 1fr); }
+.record-grid a.cell-value { display: inline-block; color: var(--accent); }
+.record-grid a.cell-value:hover { background: var(--accent); color: var(--bg); }
 
 /* ------------------------------------
    9. Split zone (text + treated photo)
@@ -494,8 +583,12 @@ strong { color: var(--fg); font-weight: 700; }
 .net-device { font-family: var(--font-macro); font-size: 0.95rem; text-transform: uppercase; }
 .net-detail { font-size: 0.8rem; color: var(--fg-dim); }
 
-/* photo records */
-.photo-grid { grid-template-columns: repeat(2, 1fr); }
+/* photo records: stronger boundary since the cards are interactive controls */
+.photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    background: var(--line-strong);
+    border-color: var(--line-strong);
+}
 .photo-card { cursor: pointer; padding: 0 !important; }
 .photo-card .img-frame { aspect-ratio: 16 / 10; overflow: hidden; }
 .gallery-thumb {
@@ -528,6 +621,7 @@ strong { color: var(--fg); font-weight: 700; }
 }
 .lightbox.is-open { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .lightbox-content { max-width: min(1100px, 92vw); max-height: 74vh; border: 1px solid var(--line-strong); }
+.lightbox-meta { text-align: center; }
 .lightbox-caption { color: var(--fg-dim); padding: 16px 0 4px; text-align: center; font-size: 0.85rem; }
 .lightbox-caption .lightbox-label { color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .lightbox-counter { font-size: 0.72rem; color: var(--fg-faint); letter-spacing: 0.1em; }
@@ -541,7 +635,8 @@ strong { color: var(--fg); font-weight: 700; }
     font-family: var(--font-mono);
     font-size: 22px;
     line-height: 1;
-    padding: 8px 12px;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     transition: background-color var(--tick), color var(--tick);
 }
@@ -556,7 +651,8 @@ strong { color: var(--fg); font-weight: 700; }
     font-family: var(--font-mono);
     font-size: 1.1em;
     cursor: pointer;
-    padding: 10px 14px;
+    min-width: 44px;
+    min-height: 44px;
     transition: background-color var(--tick), color var(--tick);
 }
 .lightbox-prev { left: 20px; }
@@ -576,7 +672,8 @@ strong { color: var(--fg); font-weight: 700; }
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(100deg, transparent 30%, rgba(234, 234, 234, 0.05) 50%, transparent 70%);
+    /* hard-edged scan band: the system allows no soft gradients */
+    background: linear-gradient(100deg, transparent 42%, rgba(234, 234, 234, 0.06) 42%, rgba(234, 234, 234, 0.06) 58%, transparent 58%);
     animation: shimmer 1.4s steps(12) infinite;
 }
 @keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
@@ -666,7 +763,7 @@ strong { color: var(--fg); font-weight: 700; }
 .rise-2 { animation-delay: 0.12s; }
 .rise-3 { animation-delay: 0.2s; }
 .rise-4 { animation-delay: 0.28s; }
-.rise-5 { animation-delay: 0.26s; }
+.rise-5 { animation-delay: 0.36s; }
 
 /* blinking block caret for live status lines */
 .caret::after {
@@ -702,8 +799,17 @@ strong { color: var(--fg); font-weight: 700; }
     .split { grid-template-columns: 1fr; }
     .hero-split { grid-template-columns: 1fr; }
     .hero-visual { display: none; }
-    .work-row { grid-template-columns: 44px minmax(0, 1fr) 44px; }
-    .work-desc, .work-lang { display: none; }
+    /* stack name over description instead of hiding the description */
+    .work-row {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        grid-template-rows: auto auto;
+        row-gap: 8px;
+    }
+    .work-idx, .work-name, .work-arrow { grid-row: 1; }
+    .work-desc { grid-column: 2; grid-row: 2; }
+    .work-pushed, .work-lang { display: none; }
+    .sel-row { grid-template-columns: 1fr; }
+    .record-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -712,7 +818,7 @@ strong { color: var(--fg); font-weight: 700; }
     .masthead-data { grid-template-columns: 1fr; }
     .nav-status { display: none; }
     .nav-link { padding: 0 10px; font-size: 0.68rem; }
-    .compartments.grid-3, .compartments.photo-grid { grid-template-columns: 1fr !important; }
+    .compartments.grid-3, .compartments.photo-grid, .compartments.record-grid { grid-template-columns: 1fr !important; }
     .mile-row, .net-row { grid-template-columns: 1fr; gap: 4px; }
     .container { padding: 0 14px; }
 }

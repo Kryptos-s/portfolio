@@ -1,8 +1,7 @@
 <template>
-  <!-- 1px sentinel: kept for the header's scroll observer -->
-  <span id="top-sentinel" aria-hidden="true" style="position: absolute; top: 0; height: 1px; width: 1px;" />
+  <a href="#main" class="skip-link">Skip to content</a>
   <SiteHeader />
-  <main class="page">
+  <main id="main" class="page" tabindex="-1">
     <slot />
   </main>
   <SiteFooter />

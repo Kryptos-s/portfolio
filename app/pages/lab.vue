@@ -3,7 +3,9 @@ import type { Photo } from '~/components/LightBox.vue'
 
 useHead({ title: 'Lab - Kryptos' })
 useSeoMeta({
-  description: 'The Kryptos homelab: Ryzen 9 9950X analysis box on Proxmox behind Ubiquiti gear.'
+  description: 'The Kryptos homelab: Ryzen 9 9950X analysis box on Proxmox behind Ubiquiti gear.',
+  ogTitle: 'Lab - Kryptos',
+  ogDescription: 'The homelab: Ryzen 9 9950X analysis box on Proxmox behind Ubiquiti gear, ingress via Cloudflare Zero Trust.'
 })
 
 // Count-up numerals; armed when the spec row scrolls in.
@@ -22,17 +24,17 @@ const network = [
 
 const photos: Photo[] = [
   {
-    thumb: '/images/lab_setup_thumbnail.jpg',
-    full: '/images/lab_setup.jpg',
+    thumb: '/images/lab_thumb.webp',
+    full: '/images/lab_full.webp',
     alt: 'Server rack with the analysis box and Ubiquiti network gear',
-    file: 'RACK_01.JPG',
+    file: 'RACK_01.WEBP',
     desc: 'The 9950X box and the Ubiquiti gear.'
   },
   {
-    thumb: '/images/setup_thumbnail.jpg',
-    full: '/images/setup.jpg',
+    thumb: '/images/setup_thumb.webp',
+    full: '/images/setup_full.webp',
     alt: 'Arch Linux workstation with multiple displays',
-    file: 'STATION.JPG',
+    file: 'STATION.WEBP',
     desc: 'The Arch box where most of the work happens.'
   }
 ]
@@ -57,8 +59,8 @@ function openAt(i: number) {
           </div>
           <h1 class="macro h-page rise rise-2">Lab</h1>
           <p class="copy rise rise-3" style="margin-top: 28px;">
-            One primary analysis cluster. Used for malware analysis, DMA-based
-            memory forensics and whatever needs a disposable VM.
+            One analysis node. Used for malware analysis, DMA-based memory
+            forensics and whatever needs a disposable VM.
           </p>
         </div>
         <div class="hero-visual rise rise-4">
@@ -117,7 +119,7 @@ function openAt(i: number) {
       <div class="container">
         <div class="zone-head">
           <h2 class="macro h-zone">[ Records ]</h2>
-          <span class="label">THE RACK AND THE DESK</span>
+          <span class="label">FILES: 2 / WEBP</span>
         </div>
         <div v-stagger class="compartments photo-grid cascade">
           <div
@@ -132,7 +134,7 @@ function openAt(i: number) {
             @keydown.space.prevent="openAt(i)"
           >
             <div class="img-frame">
-              <img :src="photo.thumb" :alt="photo.alt" class="gallery-thumb" loading="lazy">
+              <img :src="photo.thumb" :alt="photo.alt" class="gallery-thumb" width="1240" height="775" loading="lazy" decoding="async">
             </div>
             <div class="photo-meta">
               <span class="file-name">{{ photo.file }}</span>

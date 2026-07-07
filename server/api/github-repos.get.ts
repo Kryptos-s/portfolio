@@ -8,7 +8,7 @@ interface Repo {
   language: string | null
   stars: number
   url: string
-  updated: string
+  pushed: string
 }
 
 const GITHUB_TTL_MS = 5 * 60 * 1000
@@ -28,9 +28,12 @@ async function fetchGithubRepos(): Promise<Repo[]> {
   const data = await $fetch<any[]>(
     `https://api.github.com/users/${encodeURIComponent(username)}/repos`,
     {
-      query: { sort: 'updated', per_page: 10 },
+      // 'pushed' so the UI's SORT: LAST_PUSH label is literally true
+      // ('updated' also bumps on stars/metadata).
+      query: { sort: 'pushed', per_page: 10 },
       headers,
-      timeout: 8000
+      // Kept short: a cold-cache SSR render awaits this (see plugins/warm-github.ts).
+      timeout: 4000
     }
   )
 
@@ -40,7 +43,7 @@ async function fetchGithubRepos(): Promise<Repo[]> {
     language: repo.language,
     stars: repo.stargazers_count,
     url: repo.html_url,
-    updated: repo.updated_at
+    pushed: repo.pushed_at
   }))
 }
 

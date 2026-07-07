@@ -28,7 +28,7 @@ onBeforeUnmount(() => clearInterval(timer))
 <template>
   <header class="site-header">
     <div class="container">
-      <NuxtLink to="/" class="logo" title="Index">Kryptos<sup>®</sup></NuxtLink>
+      <NuxtLink to="/" class="logo" title="Index">Kryptos<sup>v2</sup></NuxtLink>
 
       <nav class="main-nav" aria-label="Main">
         <NuxtLink
@@ -41,8 +41,7 @@ onBeforeUnmount(() => clearInterval(timer))
       </nav>
 
       <div class="nav-status">
-        <span class="sys">[SYS:ONLINE]</span>
-        <span v-if="utc">{{ utc }}</span>
+        <span v-if="utc" class="sys">{{ utc }}</span>
         <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>

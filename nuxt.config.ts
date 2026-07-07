@@ -5,11 +5,9 @@ export default defineNuxtConfig({
 
   modules: ['nuxt-security'],
 
-  css: [
-    '@fontsource/archivo-black',
-    '@fontsource-variable/jetbrains-mono',
-    '~/assets/css/styles.css'
-  ],
+  // Fonts are self-hosted from public/fonts (latin + latin-ext woff2 subsets,
+  // declared in styles.css) so the two critical files can be preloaded.
+  css: ['~/assets/css/styles.css'],
 
   // Old slugs from the 7-page layout; keep links alive.
   routeRules: {
@@ -34,6 +32,9 @@ export default defineNuxtConfig({
   $production: {
     security: {
       nonce: true,
+      // No CORS headers at all: the API is same-origin only, and the default
+      // handler would otherwise emit Access-Control-Allow-Origin: *.
+      corsHandler: false,
       headers: {
         contentSecurityPolicy: {
           'default-src': ["'self'"],
@@ -50,11 +51,21 @@ export default defineNuxtConfig({
           'base-uri': ["'self'"],
           'form-action': ["'self'"]
         },
+        // Match the CSP's frame-ancestors 'none'.
+        xFrameOptions: 'DENY',
         referrerPolicy: 'strict-origin-when-cross-origin'
       },
-      // Every API route: 60 / 15 min.
-      rateLimiter: { tokensPerInterval: 60, interval: 900000, headers: true },
+      // Page routes stay unmetered; API routes get the 60 / 15 min budget via
+      // the routeRules override below.
+      rateLimiter: false,
       requestSizeLimiter: { maxRequestSizeInBytes: 20000, maxUploadFileRequestInBytes: 20000 }
+    },
+    routeRules: {
+      '/api/**': {
+        security: {
+          rateLimiter: { tokensPerInterval: 60, interval: 900000, headers: true }
+        }
+      }
     }
   },
 
@@ -65,7 +76,16 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'UTF-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-        { name: 'author', content: 'Kryptos' }
+        { name: 'author', content: 'Kryptos' },
+        { name: 'theme-color', content: '#0a0a0a' }
+      ],
+      link: [
+        { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+        // The two critical latin subsets; latin-ext loads on demand via unicode-range.
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/archivo-black-latin-400-normal.woff2' },
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/jetbrains-mono-latin-wght-normal.woff2' }
       ]
     }
   },

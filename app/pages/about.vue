@@ -1,32 +1,35 @@
 <script setup lang="ts">
 useHead({ title: 'About - Kryptos' })
 useSeoMeta({
-  description: 'Who Kryptos is: networking and CS student, low-level systems and security work in C, C++ and Rust.'
+  description: 'Who Kryptos is: networking and CS student, low-level systems and security work in C, C++ and Rust.',
+  ogTitle: 'About - Kryptos',
+  ogDescription: 'Networking and CS student. Low-level systems and security work in C, C++ and Rust.'
 })
 
+// Tagged by how often each shows up in a normal week, not by claimed mastery.
 const skillGroups = [
   {
     title: 'Languages',
     items: [
-      { name: 'C / C++ / C#', level: 'ADV' },
-      { name: 'Rust / Python', level: 'INT' },
-      { name: 'HTML / JS / TS', level: 'BEG' }
+      { name: 'C / C++', level: 'DAILY' },
+      { name: 'Rust / Go / Python', level: 'WEEKLY' },
+      { name: 'HTML / JS / TS', level: 'LEARNING' }
     ]
   },
   {
     title: 'Systems & Infra',
     items: [
-      { name: 'Docker / Proxmox / AWS', level: 'INT' },
-      { name: 'Nginx / Systemd', level: 'INT' },
-      { name: 'SQLite / MySQL', level: 'INT' }
+      { name: 'Docker / Proxmox', level: 'DAILY' },
+      { name: 'Nginx / Systemd', level: 'WEEKLY' },
+      { name: 'SQLite / MySQL', level: 'WEEKLY' }
     ]
   },
   {
     title: 'Security',
     items: [
-      { name: 'Metasploit / Nmap / BeEF', level: 'ADV' },
-      { name: 'Forensics / Reverse engineering', level: 'INT' },
-      { name: 'Offensive methodologies', level: 'INT' }
+      { name: 'Reverse engineering / forensics', level: 'DAILY' },
+      { name: 'Recon / exploitation tooling', level: 'WEEKLY' },
+      { name: 'Malware analysis (VM detonation)', level: 'WEEKLY' }
     ]
   }
 ]
@@ -40,7 +43,7 @@ const milestones = [
   {
     date: '2024 - ONGOING',
     title: 'RE record',
-    text: 'Posted solves on crackmes.one. Mostly grinding binary analysis.'
+    text: 'Binary analysis, one stripped executable at a time. Authored a crackme on crackmes.one in 2026.'
   },
   {
     date: '2024',
@@ -93,7 +96,7 @@ const toolbox = [
       <div class="container">
         <div class="zone-head">
           <h2 class="macro h-zone">[ Skills ]</h2>
-          <span class="label">SELF-ASSESSED / ROUGHLY</span>
+          <span class="label">MEASURE: USAGE / NOT MASTERY</span>
         </div>
         <div v-stagger class="compartments grid-3 cascade">
           <div v-for="group in skillGroups" :key="group.title" class="skill-group">
@@ -101,7 +104,7 @@ const toolbox = [
             <ul class="skill-list">
               <li v-for="skill in group.items" :key="skill.name">
                 <span>{{ skill.name }}</span>
-                <span class="skill-tag" :class="{ adv: skill.level === 'ADV' }">[{{ skill.level }}]</span>
+                <span class="skill-tag" :class="{ adv: skill.level === 'DAILY' }">[{{ skill.level }}]</span>
               </li>
             </ul>
           </div>
@@ -128,7 +131,7 @@ const toolbox = [
       <div class="container">
         <div class="zone-head">
           <h2 class="macro h-zone">[ Toolbox ]</h2>
-          <span class="label">DAY-TO-DAY LOADOUT</span>
+          <span class="label">CARRIED: DAILY</span>
         </div>
         <div v-stagger class="compartments grid-3 cascade">
           <div v-for="group in toolbox" :key="group.title" class="skill-group">

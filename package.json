@@ -15,8 +15,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@fontsource-variable/jetbrains-mono": "^5.2.8",
-    "@fontsource/archivo-black": "^5.2.8",
     "nuxt": "^4.0.0",
     "sqlite3": "^5.1.7",
     "vue": "^3.5.0",
