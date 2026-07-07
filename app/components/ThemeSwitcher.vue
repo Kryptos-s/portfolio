@@ -3,13 +3,16 @@ const themes = ['dark', 'light', 'purple'] as const
 
 const colorMode = useColorMode()
 
-// Render the letter only after mount so SSR (which defaults to 'dark') and the
-// client (which may restore a different stored theme) don't mismatch.
+// Render theme-dependent bits only after mount so SSR (which defaults to 'dark')
+// and the client (which may restore a different stored theme) render identically.
 const mounted = ref(false)
 onMounted(() => { mounted.value = true })
 
 const label = computed(() =>
   mounted.value ? (colorMode.preference || 'dark').charAt(0).toUpperCase() : ''
+)
+const title = computed(() =>
+  mounted.value ? `Current Theme: ${colorMode.preference}. Click to switch.` : 'Switch Theme'
 )
 
 function cycle() {
@@ -23,7 +26,7 @@ function cycle() {
   <button
     id="theme-switcher"
     aria-label="Theme Switcher"
-    :title="`Current Theme: ${colorMode.preference}. Click to switch.`"
+    :title="title"
     @click="cycle"
   >{{ label }}</button>
 </template>
