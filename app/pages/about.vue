@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useHead({ title: 'About - Kryptos' })
 useSeoMeta({
-  description: 'Who Kryptos is: networking and CS student, low-level systems and security work in C, C++ and Rust.',
+  description: 'Who Kryptos is: networking and CS student. C, C++, Rust and Go, reverse engineering, and a self-hosted homelab.',
   ogTitle: 'About - Kryptos',
-  ogDescription: 'Networking and CS student. Low-level systems and security work in C, C++ and Rust.'
+  ogDescription: 'Networking and CS student. C, C++, Rust and Go, reverse engineering, and a self-hosted homelab.'
 })
 
 // Tagged by how often each shows up in a normal week, not by claimed mastery.
@@ -42,13 +42,13 @@ const milestones = [
   },
   {
     date: '2024 - ONGOING',
-    title: 'RE record',
-    text: 'Grinding binary analysis. Authored a crackme on crackmes.one in 2026.'
+    title: 'Crackmes',
+    text: 'Working through binaries on crackmes.one. Authored one in 2026.'
   },
   {
     date: '2024',
     title: 'DEF CON 32',
-    text: 'Talks, villages, and a lot of people from the scene in Las Vegas.'
+    text: 'Attended in Las Vegas. Mostly villages and talks.'
   }
 ]
 
@@ -72,23 +72,23 @@ const toolbox = [
   <div>
     <section class="masthead container">
       <div class="masthead-strip">
-        <span class="label rise rise-1">// cat about_me.txt</span>
+        <span class="label rise rise-1">// background, tools, timeline</span>
         <span class="label rise rise-1">IDENT: WITHHELD</span>
       </div>
       <h1 class="macro h-page rise rise-2">About</h1>
       <div class="copy rise rise-3" style="margin-top: 32px;">
         <p>
           I'm <strong>Kryptos</strong>, a first-year networking and CS student at
-          SPSE Presov. Most of my time goes into low-level systems and security
-          work: C, C++, and lately a lot of Rust.
+          SPSE Presov. Outside class it's C, C++, Rust and Go, reverse
+          engineering, and a self-hosted homelab.
         </p>
         <p>
-          What I do usually comes down to figuring out how things work under the
-          hood, from packets on the wire to whatever is inside a binary. Right now
-          that means writing networking tools in Rust and grinding reverse
-          engineering challenges, mostly on Arch with Docker for the messy stuff.
+          Most of it is reverse engineering practice on crackmes.one and small
+          tools that fix an annoyance: synced lyrics in the terminal, LAN
+          monitoring for the rack. Daily driver is Arch; untrusted binaries
+          stay in VMs.
         </p>
-        <p><strong>I keep my real name off the internet. Just Kryptos.</strong></p>
+        <p><strong>I don't put my real name online.</strong></p>
       </div>
     </section>
 

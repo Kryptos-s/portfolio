@@ -17,7 +17,7 @@ const offline = computed(() => Boolean(error.value) || !repos.value)
   <div>
     <section class="masthead container">
       <div class="masthead-strip">
-        <span class="label rise rise-1 caret">// now: wrapping up a C++ networking project</span>
+        <span class="label rise rise-1 caret">// self-hosted, no open ports</span>
         <span class="label rise rise-1">EST. 2024 / SVK</span>
       </div>
       <h1 class="macro giant rise rise-2">Kryptos</h1>
@@ -72,11 +72,11 @@ const offline = computed(() => Boolean(error.value) || !repos.value)
         <div class="split">
           <div class="split-copy">
             <p class="copy">
-              A Ryzen 9 9950X box with 256GB of DDR5 running Proxmox, behind
-              Ubiquiti gear. Malware analysis, memory forensics and a lot of
-              broken VMs.
+              A Ryzen 9 9950X box with 256GB of DDR5 on Proxmox, behind
+              Ubiquiti gear. Runs the VMs for malware analysis and memory
+              forensics.
             </p>
-            <NuxtLink to="/lab" class="button">Tour the lab &gt;&gt;&gt;</NuxtLink>
+            <NuxtLink to="/lab" class="button">See the lab &gt;&gt;&gt;</NuxtLink>
           </div>
           <div class="split-media">
             <img

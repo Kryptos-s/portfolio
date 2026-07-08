@@ -54,13 +54,13 @@ function openAt(i: number) {
       <div class="hero-split">
         <div>
           <div class="masthead-strip">
-            <span class="label rise rise-1">// systemctl status lab-hardware</span>
+            <span class="label rise rise-1">// hardware, network, photos</span>
             <span class="label rise rise-1">NODES: 1</span>
           </div>
           <h1 class="macro h-page rise rise-2">Lab</h1>
           <p class="copy rise rise-3" style="margin-top: 28px;">
-            One analysis node. Used for malware analysis, DMA-based memory
-            forensics and whatever needs a disposable VM.
+            One analysis node. Malware analysis, DMA-based memory forensics,
+            and disposable VMs for anything untrusted.
           </p>
         </div>
         <div class="hero-visual rise rise-4">
