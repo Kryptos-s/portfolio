@@ -81,9 +81,10 @@ Display: Archivo Black. Body/UI: Geist. Data: JetBrains Mono.
     --line-strong: rgba(237, 237, 240, 0.16); /* interactive borders */
     --grid-line: rgba(237, 237, 240, 0.045);  /* hero blueprint grid */
 
-    --accent: #58a9dd;          /* phosphor blue */
-    --accent-dim: rgba(88, 169, 221, 0.12);
-    --glow: rgba(88, 169, 221, 0.14);         /* atmosphere */
+    /* monochrome brand: the off-white IS the accent */
+    --accent: #ededf0;
+    --accent-dim: rgba(237, 237, 240, 0.1);
+    --glow: rgba(237, 237, 240, 0.09);        /* atmosphere: white spotlight */
 
     --radius: 4px;              /* interactive elements */
     --radius-panel: 6px;        /* panels and cards */
@@ -238,7 +239,7 @@ strong { color: var(--fg); font-weight: 600; }
         z-index: 0;
         opacity: 0;
         transition: opacity 0.3s var(--ease);
-        background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(88, 169, 221, 0.07), transparent 70%);
+        background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(237, 237, 240, 0.05), transparent 70%);
         pointer-events: none;
     }
     .panel.lit:hover::before { opacity: 1; }
@@ -288,7 +289,8 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     padding: 3px 8px;
     white-space: nowrap;
 }
-.chip.accent { color: var(--accent); background: var(--accent-dim); border-color: rgba(88, 169, 221, 0.25); }
+/* inverted chip: the off-white brand moment at small scale */
+.chip.accent { color: var(--bg); background: var(--fg); border-color: var(--fg); }
 
 /* external-link arrow */
 .arrow-icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--fg-faint); transition: color 0.15s var(--ease), transform 0.15s var(--ease); }
@@ -337,7 +339,7 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     transition: color 0.15s var(--ease), background-color 0.15s var(--ease);
 }
 .nav-link:hover { color: var(--fg); background: rgba(237, 237, 240, 0.06); }
-.nav-link.active { color: var(--fg); background: rgba(237, 237, 240, 0.08); }
+.nav-link.active { color: var(--bg); background: var(--fg); }
 
 .nav-status {
     display: flex;
@@ -401,7 +403,7 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     aspect-ratio: 1;
     pointer-events: none;
 }
-.wireframe { width: 100%; aspect-ratio: 1; filter: drop-shadow(0 0 24px rgba(88, 169, 221, 0.25)); }
+.wireframe { width: 100%; aspect-ratio: 1; filter: drop-shadow(0 0 24px rgba(237, 237, 240, 0.16)); }
 
 /* page headers (about / projects / lab) */
 .masthead { padding: 56px 0 8px; }
@@ -448,21 +450,12 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     position: relative;
     transition: background-color 0.15s var(--ease);
 }
-/* phosphor edge lights up on hover */
-.work-row::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.15s var(--ease);
-}
-.work-row:hover { background: var(--surface-2); }
-.work-row:hover::after { opacity: 1; }
-.work-row:hover .arrow-icon { color: var(--fg); transform: translate(1px, -1px); }
+/* full inversion on hover: the off-white brand move */
+.work-row:hover { background: var(--fg); }
+.work-row:hover .work-name,
+.work-row:hover .work-desc { color: var(--bg); }
+.work-row:hover .chip { color: var(--bg); background: transparent; border-color: rgba(10, 10, 11, 0.35); }
+.work-row:hover .arrow-icon { color: var(--bg); transform: translate(1px, -1px); }
 .work-name {
     font-size: 0.95rem;
     font-weight: 550;
@@ -582,7 +575,7 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.06em;
-    color: var(--accent);
+    color: var(--fg-faint);
     margin-left: 6px;
 }
 .spec-cell .spec-name {
@@ -607,15 +600,17 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     overflow: hidden;
     transition: border-color 0.15s var(--ease), box-shadow 0.25s var(--ease);
 }
-.photo-card:hover { border-color: var(--line-strong); box-shadow: 0 0 32px rgba(88, 169, 221, 0.1); }
+.photo-card:hover { border-color: var(--line-strong); box-shadow: 0 0 32px rgba(237, 237, 240, 0.07); }
 .photo-card .img-frame { aspect-ratio: 16 / 10; overflow: hidden; }
 .gallery-thumb {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.25s var(--ease);
+    /* print-treated: monochrome at rest, ink returns on hover */
+    filter: grayscale(1) contrast(1.1);
+    transition: transform 0.25s var(--ease), filter 0.25s var(--ease);
 }
-.photo-card:hover .gallery-thumb { transform: scale(1.02); }
+.photo-card:hover .gallery-thumb { transform: scale(1.02); filter: none; }
 .photo-meta {
     padding: 12px 16px;
     border-top: 1px solid var(--line);
@@ -711,7 +706,8 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     padding: 44px 0 36px;
     transition: color 0.2s var(--ease), text-shadow 0.2s var(--ease);
 }
-.mega-cta:hover { color: var(--accent); text-shadow: 0 0 40px rgba(88, 169, 221, 0.22); }
+/* full inversion: the brand move */
+.mega-cta:hover { color: var(--bg); background: var(--fg); }
 .mega-cta .cta-arrow { display: inline-block; margin-left: 0.12em; }
 
 .footer-inner {

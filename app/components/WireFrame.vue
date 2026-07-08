@@ -11,7 +11,7 @@ let ctx: CanvasRenderingContext2D | null = null
 let raf = 0
 let visible = true
 let reduced = false
-let rgb: [number, number, number] = [88, 169, 221]
+let rgb: [number, number, number] = [237, 237, 240]
 let size = 420
 let dpr = 1
 let t = 0
@@ -39,7 +39,7 @@ const EDGES: [number, number][] = [
 function hexToRgb(hex: string): [number, number, number] {
   const h = hex.trim().replace('#', '')
   const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h
-  const n = parseInt(full || '58a9dd', 16)
+  const n = parseInt(full || 'ededf0', 16)
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
 }
 

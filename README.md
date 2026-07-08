@@ -13,8 +13,9 @@
 
 ## About
 
-personal site. dark, layered, a little cinematic: giant display type,
-surface panels, hairline borders, phosphor-blue glow, mono data labels.
+personal site. black and off-white, industrial: giant display type,
+surface panels, hairline borders, white-glow atmosphere, inverted hovers,
+mono data labels.
 
 runs on Nuxt. four pages (home / about / projects / lab), repos pulled live
 from GitHub through a small Nitro proxy. no contact form, just an email link.
