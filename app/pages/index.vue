@@ -22,8 +22,7 @@ const offline = computed(() => Boolean(error.value) || !repos.value)
       </div>
       <h1 class="macro giant rise rise-2">Kryptos</h1>
       <p class="statement rise rise-3">
-        I take binaries apart to see how they work.
-        <span class="dim">Then I build things that hold together.</span>
+        I reverse binaries and build low-level tools.
       </p>
       <div v-stagger class="compartments masthead-data cascade section-fade-in is-visible">
         <div>
@@ -56,7 +55,7 @@ const offline = computed(() => Boolean(error.value) || !repos.value)
         </div>
         <p v-else-if="offline" class="state-note error">
           [ERR] GITHUB LINK OFFLINE.
-          <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer" class="accent">READ THE INDEX AT SOURCE &gt;&gt;&gt;</a>
+          <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer" class="accent">OPEN GITHUB &gt;&gt;&gt;</a>
         </p>
         <p v-else class="state-note">
           [NULL] NO PUBLIC REPOSITORIES FOUND.

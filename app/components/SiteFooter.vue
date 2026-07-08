@@ -2,7 +2,7 @@
   <footer class="site-footer">
     <div class="container">
       <a href="mailto:kryptosss99@proton.me" class="mega-cta">
-        Ping me<span class="cta-arrow">&gt;&gt;&gt;</span>
+        Contact<span class="cta-arrow">&gt;&gt;&gt;</span>
       </a>
       <nav class="footer-grid" aria-label="Footer">
         <a href="mailto:kryptosss99@proton.me">Email &gt;&gt;&gt;</a>

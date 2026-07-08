@@ -344,7 +344,6 @@ strong { color: var(--fg); font-weight: 700; }
     max-width: 22ch;
     color: var(--fg);
 }
-.statement .dim { color: var(--fg-faint); }
 
 /* ------------------------------------
    8. Work index (rows)

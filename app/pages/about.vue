@@ -43,7 +43,7 @@ const milestones = [
   {
     date: '2024 - ONGOING',
     title: 'RE record',
-    text: 'Binary analysis, one stripped executable at a time. Authored a crackme on crackmes.one in 2026.'
+    text: 'Grinding binary analysis. Authored a crackme on crackmes.one in 2026.'
   },
   {
     date: '2024',
@@ -96,7 +96,7 @@ const toolbox = [
       <div class="container">
         <div class="zone-head">
           <h2 class="macro h-zone">[ Skills ]</h2>
-          <span class="label">MEASURE: USAGE / NOT MASTERY</span>
+          <span class="label">MEASURE: FREQUENCY</span>
         </div>
         <div v-stagger class="compartments grid-3 cascade">
           <div v-for="group in skillGroups" :key="group.title" class="skill-group">
@@ -131,7 +131,7 @@ const toolbox = [
       <div class="container">
         <div class="zone-head">
           <h2 class="macro h-zone">[ Toolbox ]</h2>
-          <span class="label">CARRIED: DAILY</span>
+          <span class="label">IN USE / DAILY</span>
         </div>
         <div v-stagger class="compartments grid-3 cascade">
           <div v-for="group in toolbox" :key="group.title" class="skill-group">

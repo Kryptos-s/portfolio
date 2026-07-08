@@ -17,19 +17,19 @@ const selected = [
     name: 'LyriTerm',
     url: 'https://github.com/Kryptos-s/LyriTerm',
     facts: ['LANG: GO', 'IFACE: TUI', 'DIST: AUR / GO INSTALL'],
-    copy: 'Synced lyrics for whatever is playing, rendered in the terminal. Reads the active player over MPRIS, pulls timing data from LRCLIB, and highlights word by word, karaoke style, when the track carries it. Packaged for the AUR.'
+    copy: 'Terminal app that shows synced lyrics for the currently playing song. Reads the active player over MPRIS, pulls lyrics from LRCLIB, and highlights word by word when timing data exists. Packaged for the AUR.'
   },
   {
     name: 'Homelab Monitor',
     url: 'https://github.com/Kryptos-s/homelab-monitor',
     facts: ['LANG: GO', 'SHAPE: AGENTS + DASHBOARD', 'TARGETS: LINUX / WINDOWS'],
-    copy: 'Distributed monitoring for the LAN. Each node runs a static Go agent exposing CPU, memory, disk and throughput over HTTP; one dashboard polls the fleet, groups nodes and raises alerts. No cloud dependency; everything stays on the LAN.'
+    copy: 'Self-hosted LAN monitoring. Each node runs a static Go agent exposing CPU, memory, disk and network metrics over HTTP; a central dashboard polls the agents, groups nodes and raises alerts. No cloud dependencies.'
   },
   {
     name: 'This Site',
     url: 'https://github.com/Kryptos-s/portfolio',
     facts: ['STACK: NUXT 4 / NITRO', 'DB: SQLITE', 'INGRESS: CF ZERO TRUST'],
-    copy: 'The page you are reading. Nuxt SSR on a self-hosted box behind a Cloudflare Tunnel, so the server never exposes a public port. Nonce-based CSP, rate-limited API, repos pulled live from GitHub. The stack is part of the resume.'
+    copy: 'Nuxt SSR on a self-hosted box behind a Cloudflare Tunnel; the server never exposes a public port. Nonce-based CSP, rate-limited API, SQLite telemetry, repos pulled live from GitHub.'
   }
 ]
 </script>
@@ -38,7 +38,7 @@ const selected = [
   <div>
     <section class="masthead container">
       <div class="masthead-strip">
-        <span class="label rise rise-1">// selected work first, full public index below</span>
+        <span class="label rise rise-1">// selected work + live github index</span>
         <span class="label rise rise-1">SOURCE: GITHUB / CRACKMES.ONE</span>
       </div>
       <h1 class="macro h-page rise rise-2">Projects</h1>
@@ -79,9 +79,6 @@ const selected = [
             / SNAPSHOT: 2026-07
           </span>
         </div>
-        <p class="copy" style="margin-bottom: 28px;">
-          Published for other reversers to break. Four of them wrote it up.
-        </p>
         <div v-stagger class="compartments record-grid cascade">
           <div>
             <span class="cell-label">Name</span>
@@ -125,7 +122,7 @@ const selected = [
 
         <p v-else-if="error || !repos" class="state-note error">
           [ERR] GITHUB LINK OFFLINE.
-          <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer" class="accent">READ THE INDEX AT SOURCE &gt;&gt;&gt;</a>
+          <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer" class="accent">OPEN GITHUB &gt;&gt;&gt;</a>
         </p>
 
         <p v-else-if="repos.length === 0" class="state-note">
