@@ -86,8 +86,9 @@ Display: Archivo Black. Body/UI: Geist. Data: JetBrains Mono.
     --accent-dim: rgba(237, 237, 240, 0.1);
     --glow: rgba(237, 237, 240, 0.09);        /* atmosphere: white spotlight */
 
-    --radius: 4px;              /* interactive elements */
-    --radius-panel: 6px;        /* panels and cards */
+    /* razor corners everywhere: no radius is the brand */
+    --radius: 0;
+    --radius-panel: 0;
     --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
@@ -116,12 +117,12 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 html { scrollbar-width: thin; scrollbar-color: #2a2a2e transparent; }
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #2a2a2e; border: 2px solid var(--bg); border-radius: 5px; }
+::-webkit-scrollbar-thumb { background: #2a2a2e; border: 2px solid var(--bg); }
 
 /* ------------------------------------
    2b. Analog degradation (scanlines + grain)
