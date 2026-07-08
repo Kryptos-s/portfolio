@@ -125,6 +125,27 @@ html { scrollbar-width: thin; scrollbar-color: #2a2a2e transparent; }
 ::-webkit-scrollbar-thumb { background: #2a2a2e; border: 2px solid var(--bg); }
 
 /* ------------------------------------
+   2a. Top light: a white dome anchored to the document top. The page is
+   lit at the top and falls into black as you scroll (absolute, not fixed,
+   so the light stays behind). Peak alpha is capped so faint labels keep AA.
+------------------------------------ */
+.top-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: min(720px, 90vh);
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+        120% 100% at 50% 0%,
+        rgba(237, 237, 240, 0.13),
+        rgba(237, 237, 240, 0.04) 45%,
+        transparent 75%
+    );
+}
+
+/* ------------------------------------
    2b. Analog degradation (scanlines + grain)
    The texture layer: 1px dark rows and film grain over everything,
    which is what gives the type its etched, printed look. Alphas are
@@ -415,6 +436,8 @@ a.cell-value:hover { text-decoration-color: var(--accent); }
     flex-wrap: wrap;
     margin-bottom: 18px;
 }
+/* strip labels live inside the top light; dim (not faint) keeps AA there */
+.masthead-strip .label { color: var(--fg-dim); }
 .hero-sub {
     margin-top: 24px;
     font-size: 1.05rem;

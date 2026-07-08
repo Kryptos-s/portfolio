@@ -18,6 +18,7 @@ function back() {
     <!-- error.vue renders outside layouts; recreate the shell so the failure
          path looks exactly like the rest of the site. -->
     <a href="#main" class="skip-link">Skip to content</a>
+    <div class="top-glow" aria-hidden="true" />
     <SiteHeader />
     <main id="main" class="page" tabindex="-1">
       <section class="masthead container">
