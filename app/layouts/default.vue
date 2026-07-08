@@ -5,6 +5,4 @@
     <slot />
   </main>
   <SiteFooter />
-  <div class="scanlines" aria-hidden="true" />
-  <div class="grain" aria-hidden="true" />
 </template>

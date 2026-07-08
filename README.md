@@ -1,6 +1,6 @@
 # kryptos-terminal-portfolio
 
-> personal site. industrial telemetry vibes. mostly an excuse to mess with stuff.
+> personal site. mostly an excuse to mess with stuff.
 
 
 
@@ -13,8 +13,8 @@
 
 ## About
 
-personal site. dark, industrial: one substrate, 1px compartment lines,
-mechanical steps() animations, mono telemetry labels.
+personal site. dark and quiet: one substrate, hairline borders, surface
+panels, mono kept for the data labels.
 
 runs on Nuxt. four pages (home / about / projects / lab), repos pulled live
 from GitHub through a small Nitro proxy. no contact form, just an email link.
@@ -26,7 +26,7 @@ never has an open public port.
 
 ## What's in here
 
-- dark-only design, Archivo Black + JetBrains Mono, self-hosted + preloaded fonts
+- dark-only design, Geist + JetBrains Mono, self-hosted + preloaded fonts
 - Nuxt (Vue 3) frontend, SSR
 - small Nitro API: github proxy + visitor log
 - SQLite for visitor logs
@@ -41,7 +41,7 @@ never has an open public port.
 - framework: Nuxt 4 (Vue 3)
 - server: Nitro (node)
 - db: SQLite
-- type: Archivo Black / JetBrains Mono, self-hosted woff2 subsets (preloaded, CSP-friendly)
+- type: Geist / JetBrains Mono, self-hosted woff2 subsets (preloaded, CSP-friendly)
 - security: nuxt-security (helmet-style CSP, rate limiting), same-origin checks
 - ingress: Cloudflare Tunnel (Zero Trust)
 

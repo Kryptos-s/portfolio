@@ -51,32 +51,23 @@ function openAt(i: number) {
 <template>
   <div>
     <section class="masthead container">
-      <div class="hero-split">
-        <div>
-          <div class="masthead-strip">
-            <span class="label rise rise-1">// hardware, network, photos</span>
-            <span class="label rise rise-1">NODES: 1</span>
-          </div>
-          <h1 class="macro h-page rise rise-2">Lab</h1>
-          <p class="copy rise rise-3" style="margin-top: 28px;">
-            One analysis node. Malware analysis, DMA-based memory forensics,
-            and disposable VMs for anything untrusted.
-          </p>
-        </div>
-        <div class="hero-visual rise rise-4">
-          <ClientOnly>
-            <WireFrame />
-          </ClientOnly>
-        </div>
+      <div class="masthead-strip">
+        <span class="label rise rise-1">// hardware, network, photos</span>
+        <span class="label rise rise-1">NODES: 1</span>
       </div>
+      <h1 class="h-page rise rise-2">Lab</h1>
+      <p class="copy rise rise-3" style="margin-top: 24px;">
+        One analysis node. Malware analysis, DMA-based memory forensics,
+        and disposable VMs for anything untrusted.
+      </p>
     </section>
 
-    <section v-fade-in class="zone section-fade-in" style="margin-top: 56px;">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Hardware ]</h2>
+        <div class="section-head">
+          <h2 class="section-title">Hardware</h2>
         </div>
-        <div ref="specRow" v-stagger class="compartments grid-3 cascade">
+        <div ref="specRow" v-stagger class="panel stat-grid cols-3 cascade">
           <div class="spec-cell">
             <span class="spec-name">Compute</span>
             <p class="spec-num">{{ cores.value.value }}<span class="unit">CORES</span></p>
@@ -99,13 +90,13 @@ function openAt(i: number) {
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Network ]</h2>
+        <div class="section-head">
+          <h2 class="section-title">Network</h2>
           <span class="label">INGRESS: CLOUDFLARE ZERO TRUST</span>
         </div>
-        <div class="net-rows">
+        <div class="panel net-rows">
           <div v-for="node in network" :key="node.name" class="net-row">
             <span class="net-role">{{ node.name }}</span>
             <span class="net-device">{{ node.value }}</span>
@@ -115,13 +106,12 @@ function openAt(i: number) {
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Records ]</h2>
-          <span class="label">FILES: 2 / WEBP</span>
+        <div class="section-head">
+          <h2 class="section-title">Photos</h2>
         </div>
-        <div v-stagger class="compartments photo-grid cascade">
+        <div v-stagger class="photo-grid cascade">
           <div
             v-for="(photo, i) in photos"
             :key="photo.file"

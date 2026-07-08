@@ -1,6 +1,6 @@
 // Interaction directives. Registered universally so SSR can resolve them;
 // behavior runs client-side only (directive mounted hooks don't fire on the
-// server). Industrial system: state flips only — no cursor physics.
+// server).
 export default defineNuxtPlugin((nuxtApp) => {
   // --- v-stagger --------------------------------------------------------
   // Numbers the element's children with --i so the reveal cascade can delay

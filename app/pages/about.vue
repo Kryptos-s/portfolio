@@ -73,10 +73,10 @@ const toolbox = [
     <section class="masthead container">
       <div class="masthead-strip">
         <span class="label rise rise-1">// background, tools, timeline</span>
-        <span class="label rise rise-1">IDENT: WITHHELD</span>
+        <span class="label rise rise-1">PSEUDONYMOUS</span>
       </div>
-      <h1 class="macro h-page rise rise-2">About</h1>
-      <div class="copy rise rise-3" style="margin-top: 32px;">
+      <h1 class="h-page rise rise-2">About</h1>
+      <div class="copy rise rise-3" style="margin-top: 24px;">
         <p>
           I'm <strong>Kryptos</strong>, a first-year networking and CS student at
           SPSE Presov. Outside class it's C, C++, Rust and Go, reverse
@@ -92,19 +92,19 @@ const toolbox = [
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in" style="margin-top: 64px;">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Skills ]</h2>
+        <div class="section-head">
+          <h2 class="section-title">Skills</h2>
           <span class="label">MEASURE: FREQUENCY</span>
         </div>
-        <div v-stagger class="compartments grid-3 cascade">
+        <div v-stagger class="panel grid-3 cascade">
           <div v-for="group in skillGroups" :key="group.title" class="skill-group">
             <h3>{{ group.title }}</h3>
             <ul class="skill-list">
               <li v-for="skill in group.items" :key="skill.name">
                 <span>{{ skill.name }}</span>
-                <span class="skill-tag" :class="{ adv: skill.level === 'DAILY' }">[{{ skill.level }}]</span>
+                <span class="chip" :class="{ accent: skill.level === 'DAILY' }">{{ skill.level }}</span>
               </li>
             </ul>
           </div>
@@ -112,12 +112,12 @@ const toolbox = [
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Milestones ]</h2>
+        <div class="section-head">
+          <h2 class="section-title">Milestones</h2>
         </div>
-        <div class="mile-rows">
+        <div class="panel mile-rows">
           <div v-for="item in milestones" :key="item.title" class="mile-row">
             <span class="mile-date">{{ item.date }}</span>
             <span class="mile-title">{{ item.title }}</span>
@@ -127,13 +127,12 @@ const toolbox = [
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Toolbox ]</h2>
-          <span class="label">IN USE / DAILY</span>
+        <div class="section-head">
+          <h2 class="section-title">Toolbox</h2>
         </div>
-        <div v-stagger class="compartments grid-3 cascade">
+        <div v-stagger class="panel grid-3 cascade">
           <div v-for="group in toolbox" :key="group.title" class="skill-group">
             <h3>{{ group.title }}</h3>
             <ul class="skill-list">

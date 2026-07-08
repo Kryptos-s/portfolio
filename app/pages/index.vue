@@ -15,47 +15,40 @@ const offline = computed(() => Boolean(error.value) || !repos.value)
 
 <template>
   <div>
-    <section class="masthead container">
-      <div class="masthead-strip">
-        <span class="label rise rise-1 caret">// self-hosted, no open ports</span>
-        <span class="label rise rise-1">EST. 2024 / SVK</span>
-      </div>
-      <h1 class="macro giant rise rise-2">Kryptos</h1>
-      <p class="statement rise rise-3">
-        I reverse binaries and build low-level tools.
-      </p>
-      <div v-stagger class="compartments masthead-data cascade section-fade-in is-visible">
+    <section class="hero container">
+      <div class="hero-grid">
         <div>
-          <span class="cell-label">Discipline</span>
-          <span class="cell-value">Cybersecurity / reverse engineering</span>
+          <p class="hero-eyebrow rise rise-1">Kryptos / est. 2024 / SVK</p>
+          <h1 class="hero-title rise rise-2">I reverse binaries and build low-level tools.</h1>
+          <p class="hero-sub rise rise-3">
+            Cybersecurity student at SPSE Presov. C, C++, Rust and Go,
+            self-hosted from a Proxmox box with no open ports.
+          </p>
+          <div class="hero-actions rise rise-4">
+            <NuxtLink to="/projects" class="button">View the work</NuxtLink>
+            <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer" class="button ghost">GitHub</a>
+          </div>
         </div>
-        <div>
-          <span class="cell-label">Languages</span>
-          <span class="cell-value">C / C++ / Rust / Go</span>
+        <div class="hero-visual rise rise-4">
+          <ClientOnly>
+            <WireFrame />
+          </ClientOnly>
         </div>
-        <div>
-          <span class="cell-label">Status</span>
-          <span class="cell-value">Student @ SPSE Presov, YR 1</span>
-        </div>
-        <NuxtLink to="/projects" class="cell-link">
-          <span class="cell-label">Next</span>
-          <span class="cell-value">View the work &gt;&gt;&gt;</span>
-        </NuxtLink>
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in" style="margin-top: 72px;">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ Work Index ]</h2>
+        <div class="section-head">
+          <h2 class="section-title">Work</h2>
           <span class="label">{{ offline ? 'SOURCE: GITHUB / OFFLINE' : `SOURCE: GITHUB / LIVE / N=${work.length}` }}</span>
         </div>
-        <div v-if="work.length" v-stagger class="work-rows cascade">
-          <RepoCard v-for="(repo, i) in work" :key="repo.name" :repo="repo" :idx="i" />
+        <div v-if="work.length" v-stagger class="panel work-rows cascade">
+          <RepoCard v-for="repo in work" :key="repo.name" :repo="repo" />
         </div>
         <p v-else-if="offline" class="state-note error">
           [ERR] GITHUB LINK OFFLINE.
-          <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer" class="accent">OPEN GITHUB &gt;&gt;&gt;</a>
+          <a href="https://github.com/Kryptos-s" target="_blank" rel="noopener noreferrer">OPEN GITHUB</a>
         </p>
         <p v-else class="state-note">
           [NULL] NO PUBLIC REPOSITORIES FOUND.
@@ -63,20 +56,20 @@ const offline = computed(() => Boolean(error.value) || !repos.value)
       </div>
     </section>
 
-    <section v-fade-in class="zone section-fade-in">
+    <section v-fade-in class="section section-fade-in">
       <div class="container">
-        <div class="zone-head">
-          <h2 class="macro h-zone">[ The Lab ]</h2>
+        <div class="section-head">
+          <h2 class="section-title">The lab</h2>
           <span class="label">NODES: 1 / PROXMOX</span>
         </div>
-        <div class="split">
+        <div class="panel split">
           <div class="split-copy">
             <p class="copy">
               A Ryzen 9 9950X box with 256GB of DDR5 on Proxmox, behind
               Ubiquiti gear. Runs the VMs for malware analysis and memory
               forensics.
             </p>
-            <NuxtLink to="/lab" class="button">See the lab &gt;&gt;&gt;</NuxtLink>
+            <NuxtLink to="/lab" class="button ghost">See the lab</NuxtLink>
           </div>
           <div class="split-media">
             <img

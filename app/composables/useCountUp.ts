@@ -25,10 +25,7 @@ export function useCountUp(target: number, durationMs = 900) {
     const tick = (now: number) => {
       const p = Math.min((now - t0) / durationMs, 1)
       const eased = 1 - Math.pow(1 - p, 3)
-      // Quantize to 12 discrete jumps so the readout ticks like a split-flap
-      // counter, matching the steps() motion system, instead of gliding.
-      const stepped = Math.ceil(eased * 12) / 12
-      value.value = Math.round(target * stepped)
+      value.value = Math.round(target * eased)
       if (p < 1) raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)

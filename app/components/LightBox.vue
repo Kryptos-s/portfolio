@@ -131,7 +131,7 @@ onUnmounted(() => {
     <!-- polite live region so prev/next changes are announced -->
     <div class="lightbox-meta" aria-live="polite">
       <div id="lightbox-caption" class="lightbox-caption">
-        <span class="lightbox-label">// record:</span> {{ current?.desc || 'Image record' }}
+        {{ current?.desc || 'Image' }}
       </div>
       <div id="lightbox-counter" class="lightbox-counter">[ {{ index + 1 }} / {{ photos.length }} ]</div>
     </div>
