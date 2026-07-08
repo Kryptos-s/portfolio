@@ -40,16 +40,16 @@ const selected = [
       <div class="masthead-strip">
         <span class="label rise rise-1">// selected work + live github index</span>
       </div>
-      <h1 class="h-page rise rise-2">Projects</h1>
+      <h1 class="macro h-page rise rise-2">Projects</h1>
     </section>
 
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Selected</h2>
+          <h2 class="macro h-zone">[ Selected ]</h2>
           <span class="label">CURATED / N={{ selected.length }}</span>
         </div>
-        <div v-stagger class="panel work-rows cascade">
+        <div v-stagger v-spotlight class="panel work-rows cascade">
           <div v-for="project in selected" :key="project.name" class="sel-row">
             <div>
               <h3 class="sel-name">{{ project.name }}</h3>
@@ -74,14 +74,14 @@ const selected = [
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Crackme</h2>
+          <h2 class="macro h-zone">[ Crackme ]</h2>
           <span class="label">
             SOURCE:
             <a href="https://crackmes.one/user/Kryptos" target="_blank" rel="noopener noreferrer" class="accent">CRACKMES.ONE</a>
             / SNAPSHOT: 2026-07
           </span>
         </div>
-        <div v-stagger class="panel stat-grid cols-5 cascade">
+        <div v-stagger v-spotlight class="panel stat-grid cols-5 cascade">
           <div>
             <span class="cell-label">Name</span>
             <a
@@ -114,7 +114,7 @@ const selected = [
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Index</h2>
+          <h2 class="macro h-zone">[ Full Index ]</h2>
           <span class="label">SORT: LAST_PUSH / LIVE</span>
         </div>
 
@@ -134,7 +134,7 @@ const selected = [
           [NULL] NO PUBLIC REPOSITORIES FOUND.
         </p>
 
-        <div v-else v-fade-in v-stagger class="panel work-rows cascade section-fade-in">
+        <div v-else v-fade-in v-stagger v-spotlight class="panel work-rows cascade section-fade-in">
           <RepoCard v-for="repo in repos" :key="repo.name" :repo="repo" />
         </div>
       </div>

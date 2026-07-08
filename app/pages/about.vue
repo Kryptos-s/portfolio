@@ -75,7 +75,7 @@ const toolbox = [
         <span class="label rise rise-1">// background, tools, timeline</span>
         <span class="label rise rise-1">PSEUDONYMOUS</span>
       </div>
-      <h1 class="h-page rise rise-2">About</h1>
+      <h1 class="macro h-page rise rise-2">About</h1>
       <div class="copy rise rise-3" style="margin-top: 24px;">
         <p>
           I'm <strong>Kryptos</strong>, a first-year networking and CS student at
@@ -95,10 +95,10 @@ const toolbox = [
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Skills</h2>
+          <h2 class="macro h-zone">[ Skills ]</h2>
           <span class="label">MEASURE: FREQUENCY</span>
         </div>
-        <div v-stagger class="panel grid-3 cascade">
+        <div v-stagger v-spotlight class="panel grid-3 cascade">
           <div v-for="group in skillGroups" :key="group.title" class="skill-group">
             <h3>{{ group.title }}</h3>
             <ul class="skill-list">
@@ -115,9 +115,9 @@ const toolbox = [
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Milestones</h2>
+          <h2 class="macro h-zone">[ Milestones ]</h2>
         </div>
-        <div class="panel mile-rows">
+        <div v-spotlight class="panel mile-rows">
           <div v-for="item in milestones" :key="item.title" class="mile-row">
             <span class="mile-date">{{ item.date }}</span>
             <span class="mile-title">{{ item.title }}</span>
@@ -130,9 +130,9 @@ const toolbox = [
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Toolbox</h2>
+          <h2 class="macro h-zone">[ Toolbox ]</h2>
         </div>
-        <div v-stagger class="panel grid-3 cascade">
+        <div v-stagger v-spotlight class="panel grid-3 cascade">
           <div v-for="group in toolbox" :key="group.title" class="skill-group">
             <h3>{{ group.title }}</h3>
             <ul class="skill-list">

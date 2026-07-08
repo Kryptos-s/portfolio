@@ -25,7 +25,7 @@ function back() {
           <span class="label rise rise-1">{{ notFound ? '// err: route not found' : '// err: internal error' }}</span>
           <span class="label rise rise-1">CODE: {{ code }}</span>
         </div>
-        <h1 class="h-page rise rise-2">{{ code }}</h1>
+        <h1 class="macro giant rise rise-2">{{ code }}</h1>
         <div class="copy rise rise-3" style="margin-top: 24px;">
           <p v-if="notFound">
             Nothing at this address. Check the URL or head back.

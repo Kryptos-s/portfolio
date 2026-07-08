@@ -83,7 +83,8 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
         { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        // The two critical latin subsets; latin-ext loads on demand via unicode-range.
+        // The three critical latin subsets; latin-ext loads on demand via unicode-range.
+        { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/archivo-black-latin-400-normal.woff2' },
         { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/geist-latin-wght-normal.woff2' },
         { rel: 'preload', as: 'font', type: 'font/woff2', crossorigin: '', href: '/fonts/jetbrains-mono-latin-wght-normal.woff2' }
       ]

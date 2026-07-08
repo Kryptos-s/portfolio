@@ -55,7 +55,7 @@ function openAt(i: number) {
         <span class="label rise rise-1">// hardware, network, photos</span>
         <span class="label rise rise-1">NODES: 1</span>
       </div>
-      <h1 class="h-page rise rise-2">Lab</h1>
+      <h1 class="macro h-page rise rise-2">Lab</h1>
       <p class="copy rise rise-3" style="margin-top: 24px;">
         One analysis node. Malware analysis, DMA-based memory forensics,
         and disposable VMs for anything untrusted.
@@ -65,9 +65,9 @@ function openAt(i: number) {
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Hardware</h2>
+          <h2 class="macro h-zone">[ Hardware ]</h2>
         </div>
-        <div ref="specRow" v-stagger class="panel stat-grid cols-3 cascade">
+        <div ref="specRow" v-stagger v-spotlight class="panel stat-grid cols-3 cascade">
           <div class="spec-cell">
             <span class="spec-name">Compute</span>
             <p class="spec-num">{{ cores.value.value }}<span class="unit">CORES</span></p>
@@ -93,10 +93,10 @@ function openAt(i: number) {
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Network</h2>
+          <h2 class="macro h-zone">[ Network ]</h2>
           <span class="label">INGRESS: CLOUDFLARE ZERO TRUST</span>
         </div>
-        <div class="panel net-rows">
+        <div v-spotlight class="panel net-rows">
           <div v-for="node in network" :key="node.name" class="net-row">
             <span class="net-role">{{ node.name }}</span>
             <span class="net-device">{{ node.value }}</span>
@@ -109,7 +109,7 @@ function openAt(i: number) {
     <section v-fade-in class="section section-fade-in">
       <div class="container">
         <div class="section-head">
-          <h2 class="section-title">Photos</h2>
+          <h2 class="macro h-zone">[ Photos ]</h2>
         </div>
         <div v-stagger class="photo-grid cascade">
           <div

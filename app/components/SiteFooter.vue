@@ -1,5 +1,10 @@
 <template>
   <footer class="site-footer">
+    <div class="container">
+      <a href="mailto:kryptosss99@proton.me" class="mega-cta">
+        Contact<span class="cta-arrow" aria-hidden="true">&gt;&gt;&gt;</span>
+      </a>
+    </div>
     <div class="container footer-inner">
       <p class="footer-meta">
         <span>© 2026 Kryptos / SVK</span>

@@ -13,8 +13,8 @@
 
 ## About
 
-personal site. dark and quiet: one substrate, hairline borders, surface
-panels, mono kept for the data labels.
+personal site. dark, layered, a little cinematic: giant display type,
+surface panels, hairline borders, phosphor-blue glow, mono data labels.
 
 runs on Nuxt. four pages (home / about / projects / lab), repos pulled live
 from GitHub through a small Nitro proxy. no contact form, just an email link.
@@ -26,7 +26,7 @@ never has an open public port.
 
 ## What's in here
 
-- dark-only design, Geist + JetBrains Mono, self-hosted + preloaded fonts
+- dark-only design, Archivo Black + Geist + JetBrains Mono, self-hosted + preloaded fonts
 - Nuxt (Vue 3) frontend, SSR
 - small Nitro API: github proxy + visitor log
 - SQLite for visitor logs
@@ -41,7 +41,7 @@ never has an open public port.
 - framework: Nuxt 4 (Vue 3)
 - server: Nitro (node)
 - db: SQLite
-- type: Geist / JetBrains Mono, self-hosted woff2 subsets (preloaded, CSP-friendly)
+- type: Archivo Black / Geist / JetBrains Mono, self-hosted woff2 subsets (preloaded, CSP-friendly)
 - security: nuxt-security (helmet-style CSP, rate limiting), same-origin checks
 - ingress: Cloudflare Tunnel (Zero Trust)
 
