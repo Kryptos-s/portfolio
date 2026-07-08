@@ -123,6 +123,35 @@ html { scrollbar-width: thin; scrollbar-color: #2a2a2e transparent; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #2a2a2e; border: 2px solid var(--bg); border-radius: 5px; }
 
+/* ------------------------------------
+   2b. Analog degradation (scanlines + grain)
+   The texture layer: 1px dark rows and film grain over everything,
+   which is what gives the type its etched, printed look. Alphas are
+   calibrated so --fg-faint stays >=4.5:1 even inside a darkened row.
+------------------------------------ */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.1) 3px,
+        rgba(0, 0, 0, 0.1) 4px
+    );
+}
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 501;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+}
+
 /* skip link: hidden until keyboard focus */
 .skip-link {
     position: absolute;
